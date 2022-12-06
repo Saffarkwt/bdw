@@ -38,7 +38,7 @@
                             <span t-if="o.move_type == 'out_refund'">Credit Note</span>
                             <span t-if="o.move_type == 'in_refund'">Vendor Credit Note</span>
                             <span t-if="o.move_type == 'in_invoice' and not o.is_consignment()">Purchase Invoice</span>
-                            <span t-if="o.move_type == 'in_invoice' and o.is_consignment()">Display Watch</span>
+                            <span t-if="o.move_type == 'in_invoice' and o.is_consignment()">Display Receipt</span>
                             <br/>
                             <span t-if="o.name != '/'" t-field="o.name"/>
                         </h2>
