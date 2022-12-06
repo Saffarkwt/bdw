@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="sr_view_picking_form_extend_add_button" model="ir.ui.view">
+            <field name="name">sr.stock.picking.form.extend.add.button</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+            	<xpath expr="//notebook/page[@name='operations']/field[@name='move_ids_without_package']" position="before">
+                    <button type="object" name="auto_fill_done_qty_from_reserved_qty" string="Auto Fill Done Qty From Reserved Qty" class="oe_highlight pull-right"/>
+            	</xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
