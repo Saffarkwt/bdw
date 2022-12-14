@@ -10,4 +10,15 @@
             </field>
         </field>
     </record>
+
+    <record model="ir.ui.view" id="po_number_sale_order_line_form">
+        <field name="name">sale.order.line.tree.po.number.view.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/tree//field[@name='name']" position="after">
+                <field name="po_id"/>
+            </xpath>
+        </field>
+    </record>
 </odoo>

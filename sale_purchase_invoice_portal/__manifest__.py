@@ -4,10 +4,11 @@
     "category": "",
     "summary": "",
     "description": """ """,
-    "depends": ["account"],
+    "depends": ["account",'sale'],
     "data": [
         "report/invoice_report.xml",
         "report/invoice_report_templates.xml",
+        "report/product_label_report.xml",
         "views/account_move_view.xml",
         "views/purchase_views.xml"
     ],
