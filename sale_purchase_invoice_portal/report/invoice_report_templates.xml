@@ -24,9 +24,9 @@
                                 <span t-field="o.partner_id.phone"/>
                             </t>
                             <br/>
-                            <t t-if="o.partner_id.civil_id">
+                            <t t-if="o.partner_id.email">
                                 Civil ID :
-                                <span t-field="o.partner_id.civil_id"/>
+                                <span t-field="o.partner_id.email"/>
                             </t>
                         </div>
                     </t>
