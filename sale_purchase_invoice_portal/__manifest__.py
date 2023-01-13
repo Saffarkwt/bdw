@@ -6,6 +6,7 @@
     "description": """ """,
     "depends": ["account",'sale'],
     "data": [
+        "data/ir_sequence.xml",
         "report/invoice_report.xml",
         "report/invoice_report_templates.xml",
         "report/invoice_report_refund.xml",

@@ -37,8 +37,8 @@
                             <span t-if="o.move_type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>
                             <span t-if="o.move_type == 'out_refund'">Credit Note</span>
                             <span t-if="o.move_type == 'in_refund'">Vendor Credit Note</span>
-                            <span t-if="o.move_type == 'in_invoice' and not o.is_consignment()">Purchase Invoice</span>
-                            <span t-if="o.move_type == 'in_invoice' and o.is_consignment()">Display Receipt</span>
+                            <span t-if="o.move_type == 'in_invoice' and not o.is_consignment">Purchase Invoice</span>
+                            <span t-if="o.move_type == 'in_invoice' and o.is_consignment">Display Receipt</span>
                             <br/>
                             <h5>
                                 <span t-if="o.name != '/'" t-field="o.name"/>
@@ -88,7 +88,7 @@
                                     <th name="th_quantity" class="text-right">
                                         <span>Quantity</span>
                                     </th>
-                                    <th t-if="o.is_consignment()" name="th_subtotal" class="text-right">
+                                    <th t-if="o.is_consignment" name="th_subtotal" class="text-right">
                                         <span groups="account.group_show_line_subtotals_tax_excluded">Amount</span>
                                         <span groups="account.group_show_line_subtotals_tax_included">Total Price
                                         </span>
@@ -126,7 +126,7 @@
                                                 <span t-field="line.quantity"/>
                                                 <span t-field="line.product_uom_id" groups="uom.group_uom"/>
                                             </td>
-                                            <td t-if="o.is_consignment()" class="text-right o_price_total">
+                                            <td t-if="o.is_consignment" class="text-right o_price_total">
                                                 <span class="text-nowrap" t-field="line.price_subtotal"
                                                       groups="account.group_show_line_subtotals_tax_excluded"/>
                                                 <span class="text-nowrap" t-field="line.price_total"
@@ -229,7 +229,7 @@
                         </p>
                         <div style="font-size: 12px;width:100%;">
                             <div>
-                                <span t-if="not o.is_consignment()">
+                                <span t-if="not o.is_consignment">
                                     <strong>TERMS &amp; CONDITIONS</strong>
                                         <li>Based on receipt sing by customer with his name written agreeing on the
                                             following:
@@ -264,7 +264,7 @@
                                         <br/>
                                     </p>
                                 </span>
-                                <span t-if="o.is_consignment()">
+                                <span t-if="o.is_consignment">
                                     <strong>الشروط والاحكام
                                         <br/>
                                     اقرار من العميل –
