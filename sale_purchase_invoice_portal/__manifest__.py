@@ -6,7 +6,6 @@
     "description": """ """,
     "depends": ["account",'sale'],
     "data": [
-
         "report/invoice_report.xml",
         "report/invoice_report_templates.xml",
         "report/invoice_report_refund.xml",

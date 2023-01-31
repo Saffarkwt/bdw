@@ -6,6 +6,7 @@
     "description": """ """,
     "depends": ["account",'stock'],
     "data": [
+        "data/sequence.xml",
         "views/account_move.xml",
     ],
     "demo": [],
