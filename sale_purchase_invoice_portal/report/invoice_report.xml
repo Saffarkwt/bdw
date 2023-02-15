@@ -29,6 +29,10 @@
                                     <span t-field="o.partner_id.email"/>
                                 </t>
                             </div>
+                            <span style="margin-left:-60px;">
+                                   <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.name, 600, 100)"
+                                        style="width:350px;height:60px;"/>
+                               </span>
                         </t>
                         <div class="page">
                             <h2>
@@ -228,12 +232,7 @@
                                 <div>
                                 <p>
                                     <strong style="font-weight: 500">TERMS &amp; CONDITIONS</strong>
-                                    <br/>1. Goods once sold are not subject to return or exchange<br/>2. Checking period
-                                    is
-                                    for two days from the date of the purchase<br/>3. There is no guarantee of the
-                                    authenticity or the quality of the watch or parts after checking two<br/>days
-                                    periods
-                                    from the date of purchase.
+                                    <br/>1. Goods once sold are not subject to return or exchange 2. Checking period is for two days from the date of the purchase 3. There is no guarantee of the authenticity or the quality of the watch or parts after checking two days periods from the date of purchase.
                                     <br/>
                                     <br/>
                                     <strong style="font-weight: 500">الشروط والاحكام</strong>

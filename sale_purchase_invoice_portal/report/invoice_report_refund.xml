@@ -29,6 +29,10 @@
                                 <span t-field="o.partner_id.email"/>
                             </t>
                         </div>
+                        <span style="margin-left:-60px;">
+                                   <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.name, 600, 100)"
+                                        style="width:350px;height:60px;"/>
+                               </span>
                     </t>
                     <div class="page">
                         <h2>

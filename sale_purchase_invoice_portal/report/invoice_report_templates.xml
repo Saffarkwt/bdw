@@ -29,6 +29,10 @@
                                 <span t-field="o.partner_id.email"/>
                             </t>
                         </div>
+                        <span style="margin-left:-60px;">
+                                   <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.name, 600, 100)"
+                                        style="width:350px;height:60px;"/>
+                               </span>
                     </t>
                     <div class="page">
                         <h2>
@@ -233,21 +237,8 @@
                                     <strong>TERMS &amp; CONDITIONS</strong>
                                         <li>Based on receipt sing by customer with his name written agreeing on the
                                             following:
-                                            <br/>I Above-mentioned, declare that the items sold belong to me and it’s
-                                            not been
-                                            stolen or its
-                                        </li>
-                                        <li>inauthentic, and I have received amount paid in full, and don’t have any
-                                            rights to
-                                            take the items<br/>back after I sell…Additionally I will take full
-                                            responsibilities
-                                            in case of violation in complying with<br/>rules, laws, and regulation etc.
-                                            in State
-                                            of Kuwait. Moreover, I promise to return amount in full<br/>whether items
-                                            sold is
-                                            fake (inauthentic) or in custody due to it was stolen, which is resulted of
-                                            <br/>my
-                                            fault in the end.
+                                            <br/>
+                                            I Above-mentioned, declare that the items sold belong to me and it’s not been stolen or its inauthentic, and I have received amount paid in full, and don’t have any rights to take the items back after I sell… Additionally I will take full responsibilities in case of violation in complying with rules, laws, and regulation etc. in State of Kuwait. Moreover, I promise to return amount in full whether items sold is fake (inauthentic) or in custody due to it was stolen, which is resulted of my fault in the end.
                                         </li>
                                     <br/>
                                     <strong>الشروط والاحكام</strong>
@@ -298,27 +289,7 @@
                                         <br/>
                                             Customer’s Declaration</strong>
                                         <li>
-                                            1. I Above-mentioned name, declare that the items displayed belongs to me
-                                            and it’s
-                                            not been stolen or inauthentic, and I do not have the rights to take the
-                                            items
-                                            displayed back after selling. Additionally, I take full responsibility in
-                                            case of
-                                            violation in conformity with rules, laws, and regulation etc. In State of
-                                            Kuwait.
-                                            Moreover, I promise to return the amount received in full whether the items
-                                            sold are
-                                            fake (inauthentic), stolen, or it has any defects or faults.
-                                            <br/>
-                                            2. In case the owner of the item requested to return his displayed item, he
-                                            must
-                                            attend into the shop in person and show his identification and return the
-                                            receipt.
-                                            <br/>
-                                            3. Blue Diamond is not responsible for any damage or loss of the displayed
-                                            item if
-                                            the owner has not retrieved his belongings (Items displayed) for more than 3
-                                            months.
+                                            1. I Above-mentioned name, declare that the items displayed belongs to me and it’s not been stolen or inauthentic, and I do not have the rights to take the items displayed back after selling. Additionally, I take full responsibility in case of violation in conformity with rules, laws, and regulation etc. In State of Kuwait. Moreover, I promise to return the amount received in full whether the items sold are fake (inauthentic), stolen, or it has any defects or faults. 2. In case the owner of the item requested to return his displayed item, he must attend into the shop in person and show his identification and return the receipt. 3. Blue Diamond is not responsible for any damage or loss of the displayed item if the owner has not retrieved his belongings (Items displayed) for more than 3 months.
                                         </li>
                                 </span>
 

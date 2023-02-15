@@ -8,6 +8,7 @@
     "data": [
         "data/sequence.xml",
         "views/account_move.xml",
+        "views/purchase_view.xml"
     ],
     "demo": [],
     "installable": True,
