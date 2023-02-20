@@ -9,8 +9,16 @@
                     <t t-set="o" t-value="o.with_context(lang=lang)"/>
                     <t t-set="forced_vat"
                        t-value="o.fiscal_position_id.foreign_vat"/> <!-- So that it appears in the footer of the report instead of the company VAT if it's set -->
+
                     <t t-set="address">
-                        <div t-if="o.partner_id" class="mt16">
+                        <div style=" display:inline-block;">
+                        <span style="margin-left:-60px;">
+                                   <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.name, 600, 100)"
+                                        style="width:350px;height:60px;"/>
+                               </span>
+
+                    </div>
+                        <div t-if="o.partner_id" style="display:inline-block;">
                             <h5>
                                 <strong>Customer details بيانات العميل</strong>
                             </h5>
@@ -29,12 +37,10 @@
                                 <span t-field="o.partner_id.email"/>
                             </t>
                         </div>
-                        <span style="margin-left:-60px;">
-                                   <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.name, 600, 100)"
-                                        style="width:350px;height:60px;"/>
-                               </span>
+
                     </t>
                     <div class="page">
+
                         <h2>
                             <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">Invoice</span>
                             <span t-if="o.move_type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
@@ -241,8 +247,8 @@
                                             I Above-mentioned, declare that the items sold belong to me and it’s not been stolen or its inauthentic, and I have received amount paid in full, and don’t have any rights to take the items back after I sell… Additionally I will take full responsibilities in case of violation in complying with rules, laws, and regulation etc. in State of Kuwait. Moreover, I promise to return amount in full whether items sold is fake (inauthentic) or in custody due to it was stolen, which is resulted of my fault in the end.
                                         </li>
                                     <br/>
-                                    <strong>الشروط والاحكام</strong>
-                                    <p style="margin-bottom: 0px;"><br/>اقر انا البائع المذكور اسمي اعلاه بان القطع
+                                    <p class="text-right"><strong>الشروط والاحكام</strong></p>
+                                    <p style="margin-bottom: 0px;" class="text-right"><br/>اقر انا البائع المذكور اسمي اعلاه بان القطع
                                         المباعة من
                                         قبلي عائد لي وملكي وليس مسروق أو مقلد واستلمت القيمة بالكامل<br/>ولا يحق لي
                                         استرجاع ماهو
