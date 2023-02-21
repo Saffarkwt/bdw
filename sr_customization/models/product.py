@@ -3,6 +3,7 @@ from odoo import models, api, fields
 
 class Product(models.Model):
     _inherit = "product.product"
+    _order = "create_date desc"
 
     @api.model
     def create(self,vals):
@@ -19,6 +20,7 @@ class Product(models.Model):
 
 class ProductTemplate(models.Model):
     _inherit = "product.template"
+    _order = "create_date desc"
 
     @api.model
     def default_get(self, default_fields):
