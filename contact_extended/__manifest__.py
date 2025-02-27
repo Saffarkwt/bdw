@@ -1,6 +1,6 @@
 {
     "name": "C",
-    "version": "15.0.0.0",
+    "version": "18.0.0.0",
     "category": "Warehouse",
     "license": "OPL-1",
     "summary": "Auto Fill Done Qty From Reserved Qty copy reserved quantity to done quantity auto assign done quantity auto update on hand quantity to done qty",
