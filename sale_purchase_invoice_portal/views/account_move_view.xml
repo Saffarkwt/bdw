@@ -14,7 +14,6 @@
             <field name="binding_type">report</field>
         </record>
 
-
         <record id="account_purchase_invoice_refund" model="ir.actions.report">
             <field name="name">Refund invoice</field>
             <field name="model">account.move</field>
