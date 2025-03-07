@@ -33,7 +33,8 @@ class AccountMove(models.Model):
             if move.state == 'draft':
                 move.name = '/'
             else:
-                if not self.invoice_num:
+                if not move.invoice_num:
+                    # BRAHIM
                     if move.move_type == 'out_invoice':
                         sequence = self.env['ir.sequence'].search([('code', '=', 'customer.invoice')])
                         if sequence:
