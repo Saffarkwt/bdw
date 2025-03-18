@@ -336,11 +336,30 @@
         </t>
     </template>
 
+    <template id="external_layout_report_purchase_invoice_from_seller">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+        <t t-call="web.external_layout_standard"><t t-out="0"/></t>
+
+    </template>
+
     <template id="report_purchase_invoice_from_seller">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
                 <t t-set="lang" t-value="o.partner_id.lang"/>
-                <t t-call="web.external_layout_standard">
+                <t t-call="sale_purchase_invoice_portal.external_layout_report_purchase_invoice_from_seller">
                     <t t-set="o" t-value="o.with_context(lang=lang)"/>
                     <t t-set="forced_vat"
                        t-value="o.fiscal_position_id.foreign_vat"/> <!-- So that it appears in the footer of the report instead of the company VAT if it's set -->
