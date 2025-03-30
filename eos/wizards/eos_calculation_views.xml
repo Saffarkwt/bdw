@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- EOS Calculation Wizard Form View -->
+        <record id="view_eos_calculation_wizard_form" model="ir.ui.view">
+            <field name="name">eos.calculation.wizard.form</field>
+            <field name="model">eos.calculation.wizard</field>
+            <field name="arch" type="xml">
+                <form string="End of Service Calculation">
+                    <sheet>
+                        <group>
+                            <group string="Employee Information">
+                                <field name="employee_id" options="{'no_create': True}" required="1"/>
+                                <field name="calculation_date" required="1"/>
+                                <field name="reason_id" options="{'no_create': True}" required="1"/>
+                            </group>
+                            <group string="Service Period">
+                                <field name="service_years" readonly="1"/>
+                                <field name="service_days" readonly="1"/>
+                                <field name="unpaid_leave_days" readonly="1"/>
+                                <field name="net_service_days" readonly="1"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="EOS Calculation">
+                                <field name="eos_days" readonly="1"/>
+                                <field name="eos_amount" readonly="1"/>
+                            </group>
+                            <group string="Leave Calculation">
+                                <field name="leave_days" readonly="1"/>
+                                <field name="leave_amount" readonly="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_create_request" string="Create EOS Request" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- EOS Calculation Wizard Action -->
+        <record id="action_eos_calculation_wizard" model="ir.actions.act_window">
+            <field name="name">Calculate End of Service</field>
+            <field name="res_model">eos.calculation.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

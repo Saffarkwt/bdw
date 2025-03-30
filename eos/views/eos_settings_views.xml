@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- EOS Settings Views -->
+        <record id="view_eos_settings_form" model="ir.ui.view">
+            <field name="name">eos.settings.form</field>
+            <field name="model">eos.settings</field>
+            <field name="arch" type="xml">
+                <form string="End of Service Settings">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1><field name="name" placeholder="Settings Name"/></h1>
+                        </div>
+                        <group>
+                            <group string="General Settings">
+                                <field name="active"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                                <field name="default_days_per_year"/>
+                                <field name="default_days_per_month"/>
+                            </group>
+                            <group string="Accounting Settings">
+                                <field name="eos_expense_account_id"/>
+                                <field name="eos_payable_account_id"/>
+                                <field name="eos_journal_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Payment Methods">
+                                <field name="payment_method_ids">
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                        <field name="code"/>
+                                        <field name="active"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_eos_settings_tree" model="ir.ui.view">
+            <field name="name">eos.settings.tree</field>
+            <field name="model">eos.settings</field>
+            <field name="arch" type="xml">
+                <tree string="End of Service Settings">
+                    <field name="name"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="default_days_per_year"/>
+                    <field name="default_days_per_month"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_eos_settings_search" model="ir.ui.view">
+            <field name="name">eos.settings.search</field>
+            <field name="model">eos.settings</field>
+            <field name="arch" type="xml">
+                <search string="Search End of Service Settings">
+                    <field name="name"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Company" name="company" domain="[]" context="{'group_by': 'company_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- EOS Payment Method Views -->
+        <record id="view_eos_payment_method_form" model="ir.ui.view">
+            <field name="name">eos.payment.method.form</field>
+            <field name="model">eos.payment.method</field>
+            <field name="arch" type="xml">
+                <form string="Payment Method">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1><field name="name" placeholder="Payment Method Name"/></h1>
+                        </div>
+                        <group>
+                            <field name="code"/>
+                            <field name="active"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_eos_payment_method_tree" model="ir.ui.view">
+            <field name="name">eos.payment.method.tree</field>
+            <field name="model">eos.payment.method</field>
+            <field name="arch" type="xml">
+                <tree string="Payment Methods">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_eos_payment_method_search" model="ir.ui.view">
+            <field name="name">eos.payment.method.search</field>
+            <field name="model">eos.payment.method</field>
+            <field name="arch" type="xml">
+                <search string="Search Payment Methods">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- EOS Settings Action -->
+        <record id="action_eos_settings" model="ir.actions.act_window">
+            <field name="name">EOS Settings</field>
+            <field name="res_model">eos.settings</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first EOS setting
+                </p>
+                <p>
+                    Configure end of service settings for your company.
+                </p>
+            </field>
+        </record>
+
+        <!-- EOS Payment Method Action -->
+        <record id="action_eos_payment_method" model="ir.actions.act_window">
+            <field name="name">Payment Methods</field>
+            <field name="res_model">eos.payment.method</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first payment method
+                </p>
+                <p>
+                    Define payment methods for end of service settlements.
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- EOS Reason Views -->
+        <record id="view_eos_reason_form" model="ir.ui.view">
+            <field name="name">eos.reason.form</field>
+            <field name="model">eos.reason</field>
+            <field name="arch" type="xml">
+                <form string="End of Service Reason">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1><field name="name" placeholder="Reason Name"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="code"/>
+                                <field name="active"/>
+                                <field name="calculation_method"/>
+                            </group>
+                            <group>
+                                <field name="fixed_amount" invisible="calculation_method != 'fixed'" required="calculation_method == 'fixed'"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                <field name="description" placeholder="Describe the reason and calculation method..."/>
+                            </page>
+                            <page string="Calculation Formulas" invisible="calculation_method != 'formula'">
+                                <field name="formula_ids">
+                                    <tree editable="bottom">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name"/>
+                                        <field name="min_service_years"/>
+                                        <field name="max_service_years"/>
+                                        <field name="days_per_year"/>
+                                        <field name="percentage"/>
+                                    </tree>
+                                </field>
+                                <div class="alert alert-info" role="alert" style="margin-top: 10px;">
+                                    <p><strong>Note:</strong> Configure formulas based on service periods. For each period, specify:</p>
+                                    <ul>
+                                        <li>Min/Max service years (use 0 for max if no upper limit)</li>
+                                        <li>Days per year for calculation</li>
+                                        <li>Percentage of full benefit (e.g., 50% for half benefit)</li>
+                                    </ul>
+                                    <p>Multiple formulas can be defined for different service periods.</p>
+                                </div>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_eos_reason_tree" model="ir.ui.view">
+            <field name="name">eos.reason.tree</field>
+            <field name="model">eos.reason</field>
+            <field name="arch" type="xml">
+                <tree string="End of Service Reasons">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="calculation_method"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_eos_reason_search" model="ir.ui.view">
+            <field name="name">eos.reason.search</field>
+            <field name="model">eos.reason</field>
+            <field name="arch" type="xml">
+                <search string="Search End of Service Reasons">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <filter string="Fixed Amount" name="fixed" domain="[('calculation_method', '=', 'fixed')]"/>
+                    <filter string="Formula Based" name="formula" domain="[('calculation_method', '=', 'formula')]"/>
+                    <filter string="No Compensation" name="none" domain="[('calculation_method', '=', 'none')]"/>
+                    <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Calculation Method" name="calculation_method" domain="[]" context="{'group_by': 'calculation_method'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- EOS Reason Action -->
+        <record id="action_eos_reason" model="ir.actions.act_window">
+            <field name="name">Termination Reasons</field>
+            <field name="res_model">eos.reason</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first termination reason
+                </p>
+                <p>
+                    Define reasons for termination and their calculation methods.
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>

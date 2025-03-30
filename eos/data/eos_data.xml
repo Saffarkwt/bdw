@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- EOS Payment Methods -->
+        <record id="payment_method_cash" model="eos.payment.method">
+            <field name="name">Cash</field>
+            <field name="code">cash</field>
+        </record>
+        
+        <record id="payment_method_check" model="eos.payment.method">
+            <field name="name">Check</field>
+            <field name="code">check</field>
+        </record>
+        
+        <record id="payment_method_transfer" model="eos.payment.method">
+            <field name="name">Bank Transfer</field>
+            <field name="code">transfer</field>
+        </record>
+        
+        <!-- EOS Reasons -->
+        <record id="reason_resignation_less_3_years" model="eos.reason">
+            <field name="name">Resignation (Less than 3 years)</field>
+            <field name="code">resignation_less_3</field>
+            <field name="description">Employee resignation with less than 3 years of service. No EOS benefit according to Kuwaiti labor law.</field>
+            <field name="calculation_method">none</field>
+        </record>
+        
+        <record id="reason_resignation_3_to_5_years" model="eos.reason">
+            <field name="name">Resignation (3-5 years)</field>
+            <field name="code">resignation_3_5</field>
+            <field name="description">Employee resignation with 3-5 years of service. Half EOS benefit according to Kuwaiti labor law.</field>
+            <field name="calculation_method">formula</field>
+        </record>
+        
+        <record id="formula_resignation_3_to_5_years" model="eos.reason.formula">
+            <field name="reason_id" ref="reason_resignation_3_to_5_years"/>
+            <field name="name">Half benefit for 3-5 years</field>
+            <field name="min_service_years">3</field>
+            <field name="max_service_years">5</field>
+            <field name="days_per_year">15</field>
+            <field name="percentage">50</field>
+        </record>
+        
+        <record id="reason_resignation_5_to_10_years" model="eos.reason">
+            <field name="name">Resignation (5-10 years)</field>
+            <field name="code">resignation_5_10</field>
+            <field name="description">Employee resignation with 5-10 years of service. Two-thirds EOS benefit according to Kuwaiti labor law.</field>
+            <field name="calculation_method">formula</field>
+        </record>
+        
+        <record id="formula_resignation_5_to_10_years" model="eos.reason.formula">
+            <field name="reason_id" ref="reason_resignation_5_to_10_years"/>
+            <field name="name">Two-thirds benefit for 5-10 years</field>
+            <field name="min_service_years">5</field>
+            <field name="max_service_years">10</field>
+            <field name="days_per_year">15</field>
+            <field name="percentage">66.67</field>
+        </record>
+        
+        <record id="reason_resignation_more_10_years" model="eos.reason">
+            <field name="name">Resignation (More than 10 years)</field>
+            <field name="code">resignation_more_10</field>
+            <field name="description">Employee resignation with more than 10 years of service. Full EOS benefit according to Kuwaiti labor law.</field>
+            <field name="calculation_method">formula</field>
+        </record>
+        
+        <record id="formula_resignation_more_10_years_first_5" model="eos.reason.formula">
+            <field name="reason_id" ref="reason_resignation_more_10_years"/>
+            <field name="name">First 5 years</field>
+            <field name="min_service_years">0</field>
+            <field name="max_service_years">5</field>
+            <field name="days_per_year">15</field>
+            <field name="percentage">100</field>
+            <field name="sequence">10</field>
+        </record>
+        
+        <record id="formula_resignation_more_10_years_after_5" model="eos.reason.formula">
+            <field name="reason_id" ref="reason_resignation_more_10_years"/>
+            <field name="name">After 5 years</field>
+            <field name="min_service_years">5</field>
+            <field name="max_service_years">0</field>
+            <field name="days_per_year">26</field>
+            <field name="percentage">100</field>
+            <field name="sequence">20</field>
+        </record>
+        
+        <record id="reason_termination_probation" model="eos.reason">
+            <field name="name">Termination during Probation</field>
+            <field name="code">termination_probation</field>
+            <field name="description">Termination during the 100-day probation period. No EOS benefit according to Kuwaiti labor law.</field>
+            <field name="calculation_method">none</field>
+        </record>
+        
+        <record id="reason_termination_less_5_years" model="eos.reason">
+            <field name="name">Termination (Less than 5 years)</field>
+            <field name="code">termination_less_5</field>
+            <field name="description">Termination with less than 5 years of service. 15 days per year according to Kuwaiti labor law.</field>
+            <field name="calculation_method">formula</field>
+        </record>
+        
+        <record id="formula_termination_less_5_years" model="eos.reason.formula">
+            <field name="reason_id" ref="reason_termination_less_5_years"/>
+            <field name="name">15 days per year for less than 5 years</field>
+            <field name="min_service_years">0</field>
+            <field name="max_service_years">5</field>
+            <field name="days_per_year">15</field>
+            <field name="percentage">100</field>
+        </record>
+        
+        <record id="reason_termination_more_5_years" model="eos.reason">
+            <field name="name">Termination (More than 5 years)</field>
+            <field name="code">termination_more_5</field>
+            <field name="description">Termination with more than 5 years of service. 15 days per year for first 5 years, 26 days per year after that according to Kuwaiti labor law.</field>
+            <field name="calculation_method">formula</field>
+        </record>
+        
+        <record id="formula_termination_more_5_years_first_5" model="eos.reason.formula">
+            <field name="reason_id" ref="reason_termination_more_5_years"/>
+            <field name="name">First 5 years</field>
+            <field name="min_service_years">0</field>
+            <field name="max_service_years">5</field>
+            <field name="days_per_year">15</field>
+            <field name="percentage">100</field>
+            <field name="sequence">10</field>
+        </record>
+        
+        <record id="formula_termination_more_5_years_after_5" model="eos.reason.formula">
+            <field name="reason_id" ref="reason_termination_more_5_years"/>
+            <field name="name">After 5 years</field>
+            <field name="min_service_years">5</field>
+            <field name="max_service_years">0</field>
+            <field name="days_per_year">26</field>
+            <field name="percentage">100</field>
+            <field name="sequence">20</field>
+        </record>
+        
+        <record id="reason_partial_withdrawal" model="eos.reason">
+            <field name="name">Partial EOS Withdrawal</field>
+            <field name="code">partial_withdrawal</field>
+            <field name="description">Partial withdrawal of EOS benefits while still employed.</field>
+            <field name="calculation_method">formula</field>
+        </record>
+        
+        <record id="formula_partial_withdrawal_first_5" model="eos.reason.formula">
+            <field name="reason_id" ref="reason_partial_withdrawal"/>
+            <field name="name">First 5 years</field>
+            <field name="min_service_years">0</field>
+            <field name="max_service_years">5</field>
+            <field name="days_per_year">15</field>
+            <field name="percentage">100</field>
+            <field name="sequence">10</field>
+        </record>
+        
+        <record id="formula_partial_withdrawal_after_5" model="eos.reason.formula">
+            <field name="reason_id" ref="reason_partial_withdrawal"/>
+            <field name="name">After 5 years</field>
+            <field name="min_service_years">5</field>
+            <field name="max_service_years">0</field>
+            <field name="days_per_year">26</field>
+            <field name="percentage">100</field>
+            <field name="sequence">20</field>
+        </record>
+        
+        <!-- Default EOS Settings -->
+        <record id="default_eos_settings" model="eos.settings">
+            <field name="name">Default EOS Settings</field>
+            <field name="default_days_per_year">30</field>
+            <field name="default_days_per_month">30</field>
+        </record>
+    </data>
+</odoo>

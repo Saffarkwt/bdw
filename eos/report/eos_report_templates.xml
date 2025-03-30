@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- EOS Report Templates -->
+        <template id="report_eos_request_document">
+            <t t-call="web.external_layout">
+                <t t-set="o" t-value="o.with_context(lang=lang)"/>
+                <div class="page">
+                    <h2 class="text-center">End of Service Settlement</h2>
+                    
+                    <div class="row mt32 mb32">
+                        <div class="col-6">
+                            <strong>Reference:</strong> <span t-field="o.name"/>
+                            <br/>
+                            <strong>Request Date:</strong> <span t-field="o.request_date"/>
+                            <br/>
+                            <strong>Termination Date:</strong> <span t-field="o.termination_date"/>
+                            <br/>
+                            <strong>Termination Reason:</strong> <span t-field="o.reason_id.name"/>
+                        </div>
+                        <div class="col-6">
+                            <strong>Employee:</strong> <span t-field="o.employee_id.name"/>
+                            <br/>
+                            <strong>Employee Number:</strong> <span t-field="o.employee_number"/>
+                            <br/>
+                            <strong>Department:</strong> <span t-field="o.department_id.name"/>
+                            <br/>
+                            <strong>Job Position:</strong> <span t-field="o.job_id.name"/>
+                        </div>
+                    </div>
+                    
+                    <h4>Service Information</h4>
+                    <table class="table table-sm">
+                        <tr>
+                            <td><strong>Hire Date</strong></td>
+                            <td><span t-field="o.hire_date"/></td>
+                            <td><strong>Total Service Days</strong></td>
+                            <td><span t-field="o.total_service_days"/></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Total Service Years</strong></td>
+                            <td><span t-field="o.total_service_years"/></td>
+                            <td><strong>Unpaid Leave Days</strong></td>
+                            <td><span t-field="o.unpaid_leave_days"/></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Net Service Days</strong></td>
+                            <td><span t-field="o.net_service_days"/></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                    
+                    <h4>Settlement Calculation</h4>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th class="text-right">Days</th>
+                                <th class="text-right">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>End of Service Benefit</td>
+                                <td class="text-right"><span t-field="o.eos_days"/></td>
+                                <td class="text-right"><span t-field="o.eos_amount" t-options='{"widget": "monetary", "display_currency": res_company.currency_id}'/></td>
+                            </tr>
+                            <tr>
+                                <td>Leave Encashment</td>
+                                <td class="text-right"><span t-field="o.leave_days"/></td>
+                                <td class="text-right"><span t-field="o.leave_amount" t-options='{"widget": "monetary", "display_currency": res_company.currency_id}'/></td>
+                            </tr>
+                            <tr>
+                                <td>Salary for Remaining Days</td>
+                                <td class="text-right"><span t-field="o.salary_days"/></td>
+                                <td class="text-right"><span t-field="o.salary_amount" t-options='{"widget": "monetary", "display_currency": res_company.currency_id}'/></td>
+                            </tr>
+                            <tr t-if="o.ticket_amount">
+                                <td>Ticket Amount</td>
+                                <td class="text-right"></td>
+                                <td class="text-right"><span t-field="o.ticket_amount" t-options='{"widget": "monetary", "display_currency": res_company.currency_id}'/></td>
+                            </tr>
+                            <tr t-if="o.bonus_amount">
+                                <td>Bonus Amount</td>
+                                <td class="text-right"></td>
+                                <td class="text-right"><span t-field="o.bonus_amount" t-options='{"widget": "monetary", "display_currency": res_company.currency_id}'/></td>
+                            </tr>
+                            <tr class="border-top">
+                                <td><strong>Total Settlement</strong></td>
+                                <td class="text-right"></td>
+                                <td class="text-right"><strong><span t-field="o.total_amount" t-options='{"widget": "monetary", "display_currency": res_company.currency_id}'/></strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="row mt64">
+                        <div class="col-6">
+                            <p>Payment Method: <span t-field="o.payment_method"/></p>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt64">
+                        <div class="col-4 text-center">
+                            <p>____________________<br/>Employee Signature</p>
+                        </div>
+                        <div class="col-4 text-center">
+                            <p>____________________<br/>HR Manager Signature</p>
+                        </div>
+                        <div class="col-4 text-center">
+                            <p>____________________<br/>Finance Manager Signature</p>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+        <template id="report_eos_request">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="eos.report_eos_request_document"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

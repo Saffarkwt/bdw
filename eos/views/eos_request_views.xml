@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- EOS Request Views -->
+        <record id="view_eos_request_form" model="ir.ui.view">
+            <field name="name">eos.request.form</field>
+            <field name="model">eos.request</field>
+            <field name="arch" type="xml">
+                <form string="End of Service Request">
+                    <header>
+                        <button name="action_submit" string="Submit" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+                        <button name="action_approve_manager" string="Approve" type="object" class="oe_highlight" invisible="state != 'submitted'" groups="eos.group_eos_manager"/>
+                        <button name="action_approve_hr" string="HR Approve" type="object" class="oe_highlight" invisible="state != 'approved'" groups="eos.group_eos_manager"/>
+                        <button name="action_pay" string="Mark as Paid" type="object" class="oe_highlight" invisible="state != 'hr_approved'" groups="eos.group_eos_manager"/>
+                        <button name="action_cancel" string="Cancel" type="object" invisible="state not in ('draft', 'submitted', 'approved')"/>
+                        <button name="action_draft" string="Set to Draft" type="object" invisible="state != 'cancelled'"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,submitted,approved,hr_approved,paid"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="Employee Information">
+                                <field name="employee_id" options="{'no_create': True}" readonly="state != 'draft'"/>
+                                <field name="department_id" readonly="1"/>
+                                <field name="job_id" readonly="1"/>
+                                <field name="employee_number" readonly="1"/>
+                            </group>
+                            <group string="Request Information">
+                                <field name="request_date" readonly="state != 'draft'"/>
+                                <field name="hire_date" readonly="1"/>
+                                <field name="termination_date" readonly="state != 'draft'"/>
+                                <field name="notice_start_date" readonly="state != 'draft'"/>
+                                <field name="reason_id" options="{'no_create': True}" readonly="state != 'draft'"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Service Calculation">
+                                <group>
+                                    <group string="Service Period">
+                                        <field name="total_service_days" readonly="1"/>
+                                        <field name="total_service_years" readonly="1"/>
+                                        <field name="unpaid_leave_days" readonly="1"/>
+                                        <field name="net_service_days" readonly="1"/>
+                                    </group>
+                                    <group string="EOS Calculation">
+                                        <field name="eos_days" readonly="1"/>
+                                        <field name="eos_amount" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Settlement">
+                                <group>
+                                    <group string="Leave Settlement">
+                                        <field name="leave_days" readonly="1"/>
+                                        <field name="leave_amount" readonly="1"/>
+                                    </group>
+                                    <group string="Salary Settlement">
+                                        <field name="salary_days" readonly="1"/>
+                                        <field name="salary_amount" readonly="1"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    <group string="Additional Benefits">
+                                        <field name="ticket_amount" readonly="state != 'draft'"/>
+                                        <field name="bonus_amount" readonly="state != 'draft'"/>
+                                    </group>
+                                    <group string="Total Settlement">
+                                        <field name="total_amount" readonly="1" class="oe_subtotal_footer_separator"/>
+                                        <field name="payment_method" readonly="state != 'draft'"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Accounting" groups="account.group_account_user">
+                                <group>
+                                    <field name="move_id" readonly="1"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_eos_request_tree" model="ir.ui.view">
+            <field name="name">eos.request.tree</field>
+            <field name="model">eos.request</field>
+            <field name="arch" type="xml">
+                <tree string="End of Service Requests" decoration-info="state == 'draft'" decoration-muted="state == 'cancelled'" decoration-success="state == 'paid'">
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="request_date"/>
+                    <field name="termination_date"/>
+                    <field name="reason_id"/>
+                    <field name="total_service_years"/>
+                    <field name="eos_amount" sum="Total EOS"/>
+                    <field name="total_amount" sum="Total Settlement"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_eos_request_search" model="ir.ui.view">
+            <field name="name">eos.request.search</field>
+            <field name="model">eos.request</field>
+            <field name="arch" type="xml">
+                <search string="Search End of Service Requests">
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="reason_id"/>
+                    <filter string="Draft" name="draft" domain="[('state', '=', 'draft')]"/>
+                    <filter string="Submitted" name="submitted" domain="[('state', '=', 'submitted')]"/>
+                    <filter string="Approved" name="approved" domain="[('state', '=', 'approved')]"/>
+                    <filter string="HR Approved" name="hr_approved" domain="[('state', '=', 'hr_approved')]"/>
+                    <filter string="Paid" name="paid" domain="[('state', '=', 'paid')]"/>
+                    <filter string="Cancelled" name="cancelled" domain="[('state', '=', 'cancelled')]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Employee" name="employee" domain="[]" context="{'group_by': 'employee_id'}"/>
+                        <filter string="Department" name="department" domain="[]" context="{'group_by': 'department_id'}"/>
+                        <filter string="Reason" name="reason" domain="[]" context="{'group_by': 'reason_id'}"/>
+                        <filter string="Status" name="status" domain="[]" context="{'group_by': 'state'}"/>
+                        <filter string="Request Date" name="request_date" domain="[]" context="{'group_by': 'request_date'}"/>
+                        <filter string="Termination Date" name="termination_date" domain="[]" context="{'group_by': 'termination_date'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_eos_request_calendar" model="ir.ui.view">
+            <field name="name">eos.request.calendar</field>
+            <field name="model">eos.request</field>
+            <field name="arch" type="xml">
+                <calendar string="End of Service Requests" date_start="termination_date" color="state" mode="month">
+                    <field name="employee_id"/>
+                    <field name="reason_id"/>
+                    <field name="total_amount"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record id="view_eos_request_pivot" model="ir.ui.view">
+            <field name="name">eos.request.pivot</field>
+            <field name="model">eos.request</field>
+            <field name="arch" type="xml">
+                <pivot string="End of Service Analysis">
+                    <field name="employee_id" type="row"/>
+                    <field name="reason_id" type="row"/>
+                    <field name="termination_date" type="col"/>
+                    <field name="eos_amount" type="measure"/>
+                    <field name="leave_amount" type="measure"/>
+                    <field name="salary_amount" type="measure"/>
+                    <field name="total_amount" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="view_eos_request_graph" model="ir.ui.view">
+            <field name="name">eos.request.graph</field>
+            <field name="model">eos.request</field>
+            <field name="arch" type="xml">
+                <graph string="End of Service Analysis">
+                    <field name="reason_id"/>
+                    <field name="total_amount" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- EOS Request Action -->
+        <record id="action_eos_request" model="ir.actions.act_window">
+            <field name="name">End of Service Requests</field>
+            <field name="res_model">eos.request</field>
+            <field name="view_mode">tree,form,calendar,pivot,graph</field>
+            <field name="context">{'search_default_draft': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first end of service request
+                </p>
+                <p>
+                    Create end of service requests for employees leaving the company.
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>
