@@ -499,6 +499,9 @@
                                     <th name="th_quantity" class="text-right">
                                         <span>Quantity</span>
                                     </th>
+                                    <th name="th_unite_price" class="text-right">
+                                        <span>Unite price</span>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody class="invoice_tbody">
@@ -530,6 +533,9 @@
                                             <td class="text-right">
                                                 <span t-field="line.quantity"/>
                                                 <span t-field="line.product_uom_id" groups="uom.group_uom"/>
+                                            </td>
+                                             <td class="text-right">
+                                                <span t-field="line.price_unit"/>
                                             </td>
                                             <td t-if="o.is_consignment" class="text-right o_price_total">
                                                 <span class="text-nowrap" t-field="line.price_subtotal"
