@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Add condition to show sales invoice template only for customer invoices -->
+    <record id="action_report_sales_invoice_condition" model="ir.actions.server">
+        <field name="name">Show Sales Invoice Template</field>
+        <field name="model_id" ref="account.model_account_move"/>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="binding_view_types">form</field>
+        <field name="state">code</field>
+        <field name="code">
+            if records.move_type == 'out_invoice':
+                action = {
+                    'type': 'ir.actions.report',
+                    'report_name': 'custom_invoice_templates.report_sales_invoice',
+                    'report_type': 'qweb-pdf',
+                    'context': self.env.context,
+                }
+                result = action
+        </field>
+    </record>
+
+    <!-- Add condition to show purchase invoice template only for vendor invoices -->
+    <record id="action_report_purchase_invoice_condition" model="ir.actions.server">
+        <field name="name">Show Purchase Invoice Template</field>
+        <field name="model_id" ref="account.model_account_move"/>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="binding_view_types">form</field>
+        <field name="state">code</field>
+        <field name="code">
+            if records.move_type == 'in_invoice':
+                action = {
+                    'type': 'ir.actions.report',
+                    'report_name': 'custom_invoice_templates.report_purchase_invoice',
+                    'report_type': 'qweb-pdf',
+                    'context': self.env.context,
+                }
+                result = action
+        </field>
+    </record>
+</odoo>
