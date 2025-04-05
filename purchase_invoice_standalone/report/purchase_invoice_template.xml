@@ -8,49 +8,35 @@
                         <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
                         
                         <div class="page" style="font-size: 16px;">
-                            <!-- New Header with Stacked Logo and Company Name at Far Right -->
-                            <div class="row mb-3" style="position: relative; overflow: hidden;">
-                                <!-- Gray background -->
-                                <div style="position: absolute; top: 0; right: 0; width: 80%; height: 100%; background-color: #f0f2f7; border-radius: 0 0 0 100px; z-index: -1;"></div>
-                                
-                                <!-- Stacked Logo on left -->
-                                <div class="col-4">
-                                    <div style="position: relative; width: 130px; height: 130px;">
-                                        <!-- Stacked frames for logo -->
-                                        <div style="position: absolute; top: 10px; left: 10px; border: 1px solid #333; width: 110px; height: 110px;"></div>
-                                        <div style="position: absolute; top: 5px; left: 5px; border: 1px solid #333; width: 120px; height: 120px;"></div>
-                                        <div style="position: absolute; top: 0; left: 0; border: 1px solid #333; width: 130px; height: 130px; padding: 10px;">
-                                            <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="width: 100%; height: 100%; object-fit: contain;"/>
-                                        </div>
-                                    </div>
+                            <!-- Header with Logo and Company Info - Copied exactly from sales invoice template -->
+                            <div class="row mb-1">
+                                <div class="col-6">
+                                    <img src="/custom_invoice_templates/static/description/blue_diamond_logo.png" style="max-height: 70px;" t-if="o.company_id.logo"/>
                                 </div>
-                                
-                                <!-- Empty middle space -->
-                                <div class="col-2">
-                                </div>
-                                
-                                <!-- Company name at far right -->
-                                <div class="col-6 text-right" style="padding-top: 20px;">
-                                    <h2 style="margin-bottom: 0; font-weight: bold; text-align: right;">Blue Diamond <span style="font-family: 'Arial Unicode MS', sans-serif;">الماسة الزرقاء</span></h2>
-                                    <p style="margin-bottom: 0; font-family: 'Arial Unicode MS', sans-serif; direction: rtl; text-align: right;">بيع - شراء - تثمين الساعات الثمينة</p>
+                                <div class="col-6 text-right">
+                                    <h3 style="margin-bottom: 0;">Blue Diamond الماسة الزرقاء</h3>
+                                    <p style="margin-bottom: 0;">Sale - Purchase - Valuation of Precious Watches</p>
                                 </div>
                             </div>
                             
-                            <hr style="margin-top: 5px; margin-bottom: 15px;"/>
+                            <hr style="margin-top: 5px; margin-bottom: 5px;"/>
                             
                             <!-- Vendor Information and Barcode -->
-                            <div class="row mb-3">
+                            <div class="row mb-1">
                                 <div class="col-6">
-                                    <!-- Left side has barcode -->
-                                    <img t-att-src="'/report/barcode/Code128/'+o.name" style="width:300px;height:50px;"/>
-                                    <h3 class="mt-1 mb-0">Purchase Invoice</h3>
-                                    <h4 class="mt-0 mb-1" t-field="o.name"/>
+                                    <!-- Left side - intentionally left empty for layout balance -->
                                 </div>
                                 <div class="col-6 text-right">
-                                    <!-- Right side has customer info -->
-                                    <strong>Name: </strong><span t-field="o.partner_id"/><br/>
-                                    <strong>Phone: </strong><span t-field="o.partner_id.phone"/><br/>
-                                    <strong>Civil ID: </strong><span t-field="o.partner_id.email"/>
+                                    <strong>Name : </strong><span t-field="o.partner_id"/><br/>
+                                    <strong>Phone : </strong><span t-field="o.partner_id.phone"/><br/>
+                                    <strong>Civil ID : </strong><span t-field="o.partner_id.email"/>
+                                    
+                                    <!-- Barcode and Invoice Title moved to right side -->
+                                    <div class="mt-2">
+                                        <img t-att-src="'/report/barcode/Code128/'+o.name" style="width:300px;height:50px;"/>
+                                        <h3 class="mt-1 mb-0">Purchase Invoice</h3>
+                                        <h4 class="mt-0 mb-1" t-field="o.name"/>
+                                    </div>
                                 </div>
                             </div>
                             
@@ -190,7 +176,7 @@
                             
                             <!-- Signature -->
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-12 text-right">
                                     <p class="mb-0">
                                         <strong>Name</strong>
                                     </p>
