@@ -479,11 +479,10 @@
                             <thead style="background-color: #f8f9fa;">
                                 <tr>
                                     <th class="text-left" style="width: 5%;">Sr no.</th>
-                                    <th class="text-left" style="width: 35%;">Description</th>
-                                    <th class="text-left" style="width: 15%;">Serial No</th>
-                                    <th class="text-left" style="width: 15%;">Model No</th>
+                                    <th class="text-left" style="width: 40%;">Description</th>
+                                    <th class="text-left" style="width: 20%;">Serial No</th>
+                                    <th class="text-left" style="width: 20%;">Model No</th>
                                     <th class="text-right" style="width: 15%;">Quantity</th>
-                                    <th class="text-right" style="width: 15%;">Unite price</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -514,9 +513,6 @@
                                             <td class="text-right">
                                                 <span t-field="line.quantity"/>
                                                 <span t-field="line.product_uom_id" groups="uom.group_uom"/>
-                                            </td>
-                                            <td class="text-right">
-                                                <span t-field="line.price_unit"/>
                                             </td>
                                         </t>
                                         <t t-elif="line.display_type == 'line_section'">
@@ -576,25 +572,28 @@
                         <div class="mb-1" style="font-size: 14px;">
                             <p class="mb-0">Please use the following communication for your payment : <span t-field="o.name"/></p>
                             <strong>TERMS &amp; CONDITIONS</strong>
-                            <p class="mb-0">1. Goods once sold are not subject to return or exchange</p>
-                            <p class="mb-0">2. Checking period is for two days from the date of the purchase</p>
-                            <p class="mb-0">3. There is no guarantee of the authenticity or the quality of the watch or parts after checking two days periods from the date of purchase.</p>
-                            <p class="mb-0">I received and examined the goods along with its sets, and I am aware of their condition, and I do not have the right to claim for any refund or whats so ever in the event of a defect after the examination period. In the end, the appreciation is due to the "Blue Diamond" decision accordance with the laws and regulations in force in Kuwait for non-refundable watches, jewelry and gold.</p>
+                            <p class="mb-0">• Based on receipt sing by customer with his name written agreeing on the following:</p>
+                            <p class="mb-0">I Above-mentioned, declare that the items sold belong to me and it's not been stolen or its</p>
+                            <p class="mb-0">• inauthentic, and I have received amount paid in full, and don't have any rights to take the items</p>
+                            <p class="mb-0">back after I sell…Additionally I will take full responsibilities in case of violation in complying with</p>
+                            <p class="mb-0">rules, laws, and regulation etc. in State of Kuwait. Moreover, I promise to return amount in full</p>
+                            <p class="mb-0">whether items sold is fake (inauthentic) or in custody due to it was stolen, which is resulted of</p>
+                            <p class="mb-0">my fault in the end.</p>
                             
                             <p class="text-right mb-0">
                                 <strong>الشروط والاحكام</strong>
                             </p>
                             <p class="text-right mb-0">
-                                1. البضاعة المباعة لاترد ولاتستبدل
+                                اقر انا البائع المذكور اسمي اعلاه بان القطع المباعة من قبلي عائد لي وملكي وليس مسروق أو مقلد واستلمت القيمة بالكامل
                             </p>
                             <p class="text-right mb-0">
-                                2. مدة الفحص يومين من تاريخ الشراء
+                                ولا يحق لي استرجاع ماهو مباع مرة أخرى وأتحمل المسئولية الكاملة تجاه الجهات الرسمية أو الجهات القانونية في حال
                             </p>
                             <p class="text-right mb-0">
-                                3. لا يوجد ضمان باصلية أو جودة البضاعة بعد مدة الفحص يومين من تاريخ الشراء
+                                ثبوت عكس ذلك او مخالفة الشروط القانونية والجزائية في دولة الكويت. واتعهد برد القيمة كاملة اذا كانت القطعة المباعة
                             </p>
                             <p class="text-right mb-0">
-                                استلمت وعاينت البضاعة وملحقاتها وعلمي بحالتها ولا يحق لي الرجوع بمطالبة استردادها في حال وجود عيب بعد مدة الفحص. ويرجع التقدير للماسة الزرقاء وفقا للقوانين واللوائح المعمولة بالكويت للساعات والمجوهرات والذهب الغير قابلة للرد
+                                مقلدة أو غير اصلية، أو مسروقة أو يوجد فيها عيب أو خلل.
                             </p>
                         </div>
                         
@@ -683,11 +682,10 @@
                         <table class="table table-sm table-bordered mb-1" style="font-size: 14px;">
                             <thead style="background-color: #f8f9fa;">
                                 <tr>
-                                    <th class="text-right" style="width: 15%;">سعر الوحدة</th>
                                     <th class="text-right" style="width: 15%;">الكمية</th>
-                                    <th class="text-right" style="width: 15%;">رقم الموديل</th>
-                                    <th class="text-right" style="width: 15%;">الرقم التسلسلي</th>
-                                    <th class="text-right" style="width: 35%;">الوصف</th>
+                                    <th class="text-right" style="width: 20%;">رقم الموديل</th>
+                                    <th class="text-right" style="width: 20%;">الرقم التسلسلي</th>
+                                    <th class="text-right" style="width: 40%;">الوصف</th>
                                     <th class="text-right" style="width: 5%;">الرقم</th>
                                 </tr>
                             </thead>
@@ -703,9 +701,6 @@
                                     
                                     <tr t-att-class="'fw-bold o_line_section' if line.display_type == 'line_section' else 'fst-italic o_line_note' if line.display_type == 'line_note' else ''">
                                         <t t-if="line.display_type == 'product'" name="account_invoice_line_accountable">
-                                            <td class="text-right">
-                                                <span t-field="line.price_unit"/>
-                                            </td>
                                             <td class="text-right">
                                                 <span t-field="line.quantity"/>
                                                 <span t-field="line.product_uom_id" groups="uom.group_uom"/>
@@ -784,23 +779,26 @@
                                 <strong>الشروط والاحكام</strong>
                             </p>
                             <p class="text-right mb-0">
-                                1. البضاعة المباعة لاترد ولاتستبدل
+                                اقر انا البائع المذكور اسمي اعلاه بان القطع المباعة من قبلي عائد لي وملكي وليس مسروق أو مقلد واستلمت القيمة بالكامل
                             </p>
                             <p class="text-right mb-0">
-                                2. مدة الفحص يومين من تاريخ الشراء
+                                ولا يحق لي استرجاع ماهو مباع مرة أخرى وأتحمل المسئولية الكاملة تجاه الجهات الرسمية أو الجهات القانونية في حال
                             </p>
                             <p class="text-right mb-0">
-                                3. لا يوجد ضمان باصلية أو جودة البضاعة بعد مدة الفحص يومين من تاريخ الشراء
+                                ثبوت عكس ذلك او مخالفة الشروط القانونية والجزائية في دولة الكويت. واتعهد برد القيمة كاملة اذا كانت القطعة المباعة
                             </p>
                             <p class="text-right mb-0">
-                                استلمت وعاينت البضاعة وملحقاتها وعلمي بحالتها ولا يحق لي الرجوع بمطالبة استردادها في حال وجود عيب بعد مدة الفحص. ويرجع التقدير للماسة الزرقاء وفقا للقوانين واللوائح المعمولة بالكويت للساعات والمجوهرات والذهب الغير قابلة للرد
+                                مقلدة أو غير اصلية، أو مسروقة أو يوجد فيها عيب أو خلل.
                             </p>
                             
                             <strong>TERMS &amp; CONDITIONS</strong>
-                            <p class="mb-0">1. Goods once sold are not subject to return or exchange</p>
-                            <p class="mb-0">2. Checking period is for two days from the date of the purchase</p>
-                            <p class="mb-0">3. There is no guarantee of the authenticity or the quality of the watch or parts after checking two days periods from the date of purchase.</p>
-                            <p class="mb-0">I received and examined the goods along with its sets, and I am aware of their condition, and I do not have the right to claim for any refund or whats so ever in the event of a defect after the examination period. In the end, the appreciation is due to the "Blue Diamond" decision accordance with the laws and regulations in force in Kuwait for non-refundable watches, jewelry and gold.</p>
+                            <p class="mb-0">• Based on receipt sing by customer with his name written agreeing on the following:</p>
+                            <p class="mb-0">I Above-mentioned, declare that the items sold belong to me and it's not been stolen or its</p>
+                            <p class="mb-0">• inauthentic, and I have received amount paid in full, and don't have any rights to take the items</p>
+                            <p class="mb-0">back after I sell…Additionally I will take full responsibilities in case of violation in complying with</p>
+                            <p class="mb-0">rules, laws, and regulation etc. in State of Kuwait. Moreover, I promise to return amount in full</p>
+                            <p class="mb-0">whether items sold is fake (inauthentic) or in custody due to it was stolen, which is resulted of</p>
+                            <p class="mb-0">my fault in the end.</p>
                         </div>
                         
                         <!-- Signature -->
