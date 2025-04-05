@@ -8,7 +8,7 @@ class AccountMove(models.Model):
         self.ensure_one()
         
         # Clear report caches to ensure the latest template is used
-        self.env['ir.actions.report']._clear_caches()
+        self.env['ir.actions.report'].clear_caches()
         
         # Only allow for purchase invoices
         if self.move_type != 'in_invoice':
