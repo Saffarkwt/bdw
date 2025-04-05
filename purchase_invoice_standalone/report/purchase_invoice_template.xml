@@ -21,22 +21,20 @@
                             
                             <hr style="margin-top: 5px; margin-bottom: 5px;"/>
                             
-                            <!-- Vendor Information and Barcode -->
+                            <!-- Vendor Information and Barcode - Moved barcode to left side -->
                             <div class="row mb-1">
+                                <!-- Barcode and Invoice Title moved to left side -->
                                 <div class="col-6">
-                                    <!-- Left side - intentionally left empty for layout balance -->
-                                </div>
-                                <div class="col-6 text-right">
-                                    <strong>Name : </strong><span t-field="o.partner_id"/><br/>
-                                    <strong>Phone : </strong><span t-field="o.partner_id.phone"/><br/>
-                                    <strong>Civil ID : </strong><span t-field="o.partner_id.email"/>
-                                    
-                                    <!-- Barcode and Invoice Title moved to right side -->
                                     <div class="mt-2">
                                         <img t-att-src="'/report/barcode/Code128/'+o.name" style="width:300px;height:50px;"/>
                                         <h3 class="mt-1 mb-0">Purchase Invoice</h3>
                                         <h4 class="mt-0 mb-1" t-field="o.name"/>
                                     </div>
+                                </div>
+                                <div class="col-6 text-right">
+                                    <strong>Name : </strong><span t-field="o.partner_id"/><br/>
+                                    <strong>Phone : </strong><span t-field="o.partner_id.phone"/><br/>
+                                    <strong>Civil ID : </strong><span t-field="o.partner_id.email"/>
                                 </div>
                             </div>
                             
