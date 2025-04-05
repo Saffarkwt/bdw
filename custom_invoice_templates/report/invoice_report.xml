@@ -25,13 +25,13 @@
             <field name="binding_type">report</field>
         </record>
 
-        <!-- Purchase Invoice Report (English) - Using Arabic template -->
+        <!-- Purchase Invoice Report (English) -->
         <record id="action_report_purchase_invoice_english" model="ir.actions.report">
             <field name="name">Purchase Invoice (English)</field>
             <field name="model">account.move</field>
             <field name="report_type">qweb-pdf</field>
-            <field name="report_name">custom_invoice_templates.report_purchase_invoice_arabic</field>
-            <field name="report_file">custom_invoice_templates.report_purchase_invoice_arabic</field>
+            <field name="report_name">custom_invoice_templates.report_purchase_invoice_english</field>
+            <field name="report_file">custom_invoice_templates.report_purchase_invoice_english</field>
             <field name="print_report_name">'Purchase Invoice - %s' % (object.name)</field>
             <field name="binding_model_id" ref="account.model_account_move"/>
             <field name="binding_type">report</field>
