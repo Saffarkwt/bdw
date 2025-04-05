@@ -21,20 +21,27 @@
                             
                             <hr style="margin-top: 5px; margin-bottom: 5px;"/>
                             
-                            <!-- Vendor Information and Barcode - Moved barcode to left side -->
-                            <div class="row mb-1">
-                                <!-- Barcode and Invoice Title moved to left side -->
+                            <!-- Vendor Information -->
+                            <div class="row mb-3">
                                 <div class="col-6">
-                                    <div class="mt-2">
-                                        <img t-att-src="'/report/barcode/Code128/'+o.name" style="width:300px;height:50px;"/>
-                                        <h3 class="mt-1 mb-0">Purchase Invoice</h3>
-                                        <h4 class="mt-0 mb-1" t-field="o.name"/>
-                                    </div>
+                                    <!-- Left side intentionally left empty -->
                                 </div>
                                 <div class="col-6 text-right">
                                     <strong>Name : </strong><span t-field="o.partner_id"/><br/>
                                     <strong>Phone : </strong><span t-field="o.partner_id.phone"/><br/>
                                     <strong>Civil ID : </strong><span t-field="o.partner_id.email"/>
+                                </div>
+                            </div>
+                            
+                            <!-- Barcode section moved below vendor info - matching sales invoice template -->
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <img t-att-src="'/report/barcode/Code128/'+o.name" style="width:300px;height:50px;"/>
+                                    <h3 class="mt-1 mb-0">Purchase Invoice</h3>
+                                    <h4 class="mt-0 mb-1" t-field="o.name"/>
+                                </div>
+                                <div class="col-6">
+                                    <!-- Right side intentionally left empty -->
                                 </div>
                             </div>
                             
