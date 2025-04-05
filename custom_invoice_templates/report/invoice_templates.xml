@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- English Sales Invoice Template -->
-    <template id="report_sales_invoice_document_english">
+    <template id="report_sales_invoice_english">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
                 <t t-set="lang" t-value="o.partner_id.lang"/>
@@ -198,7 +198,7 @@
     </template>
 
     <!-- Arabic Sales Invoice Template -->
-    <template id="report_sales_invoice_document_arabic">
+    <template id="report_sales_invoice_arabic">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
                 <t t-set="lang" t-value="o.partner_id.lang"/>
@@ -397,7 +397,7 @@
     </template>
 
     <!-- English Purchase Invoice Template -->
-    <template id="report_purchase_invoice_document_english">
+    <template id="report_purchase_invoice_english">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
                 <t t-set="lang" t-value="o.partner_id.lang"/>
@@ -594,7 +594,7 @@
     </template>
 
     <!-- Arabic Purchase Invoice Template -->
-    <template id="report_purchase_invoice_document_arabic">
+    <template id="report_purchase_invoice_arabic">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
                 <t t-set="lang" t-value="o.partner_id.lang"/>
