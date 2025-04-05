@@ -8,30 +8,35 @@
                         <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
                         
                         <div class="page" style="font-size: 16px;">
-                            <!-- Header with Logo and Company Info -->
-                            <div class="row mb-1">
-                                <div class="col-6">
-                                    <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="max-height: 70px;"/>
-                                    <h3 style="margin-top: 10px;">BLUE DIAMOND</h3>
+                            <!-- New Header with Logo and Bilingual Company Info -->
+                            <div class="row mb-3" style="position: relative; overflow: hidden;">
+                                <!-- Gray background curve -->
+                                <div style="position: absolute; top: 0; right: 0; width: 70%; height: 100%; background-color: #f0f2f7; border-radius: 0 0 0 100px; z-index: -1;"></div>
+                                
+                                <!-- Logo on left -->
+                                <div class="col-4">
+                                    <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="max-height: 100px; border: 1px solid #333; padding: 5px;"/>
                                 </div>
-                                <div class="col-6 text-right">
-                                    <h3 style="margin-bottom: 0;">Blue Diamond</h3>
-                                    <p style="margin-bottom: 0;">Buy - Sell - Valuation of Luxury Watches</p>
+                                
+                                <!-- Bilingual text on right -->
+                                <div class="col-8 text-right" style="padding-top: 20px;">
+                                    <h2 style="margin-bottom: 0; font-weight: bold;">Blue Diamond <span style="font-family: 'Arial Unicode MS', sans-serif;">الماسة الزرقاء</span></h2>
+                                    <p style="margin-bottom: 0; font-family: 'Arial Unicode MS', sans-serif; direction: rtl; text-align: right;">بيع - شراء - تثمين الساعات الثمينة</p>
                                 </div>
                             </div>
                             
                             <hr style="margin-top: 5px; margin-bottom: 15px;"/>
                             
-                            <!-- Vendor Information and Barcode - Moved to right side -->
+                            <!-- Vendor Information and Barcode -->
                             <div class="row mb-3">
                                 <div class="col-6">
-                                    <!-- Left side now has barcode -->
+                                    <!-- Left side has barcode -->
                                     <img t-att-src="'/report/barcode/Code128/'+o.name" style="width:300px;height:50px;"/>
                                     <h3 class="mt-1 mb-0">Purchase Invoice</h3>
                                     <h4 class="mt-0 mb-1" t-field="o.name"/>
                                 </div>
                                 <div class="col-6 text-right">
-                                    <!-- Right side now has customer info -->
+                                    <!-- Right side has customer info -->
                                     <strong>Name: </strong><span t-field="o.partner_id"/><br/>
                                     <strong>Phone: </strong><span t-field="o.partner_id.phone"/><br/>
                                     <strong>Civil ID: </strong><span t-field="o.partner_id.email"/>
