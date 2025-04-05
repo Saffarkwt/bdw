@@ -22,27 +22,19 @@
                             
                             <hr style="margin-top: 5px; margin-bottom: 15px;"/>
                             
-                            <!-- Vendor Information and Barcode -->
+                            <!-- Vendor Information and Barcode - Moved to right side -->
                             <div class="row mb-3">
                                 <div class="col-6">
-                                    <!-- Left side intentionally left empty -->
-                                </div>
-                                <div class="col-6 text-right">
-                                    <strong>Name: </strong><span t-field="o.partner_id"/><br/>
-                                    <strong>Phone: </strong><span t-field="o.partner_id.phone"/><br/>
-                                    <strong>Civil ID: </strong><span t-field="o.partner_id.email"/>
-                                </div>
-                            </div>
-                            
-                            <!-- Barcode section moved below vendor info -->
-                            <div class="row mb-3">
-                                <div class="col-6">
+                                    <!-- Left side now has barcode -->
                                     <img t-att-src="'/report/barcode/Code128/'+o.name" style="width:300px;height:50px;"/>
                                     <h3 class="mt-1 mb-0">Purchase Invoice</h3>
                                     <h4 class="mt-0 mb-1" t-field="o.name"/>
                                 </div>
-                                <div class="col-6">
-                                    <!-- Right side intentionally left empty -->
+                                <div class="col-6 text-right">
+                                    <!-- Right side now has customer info -->
+                                    <strong>Name: </strong><span t-field="o.partner_id"/><br/>
+                                    <strong>Phone: </strong><span t-field="o.partner_id.phone"/><br/>
+                                    <strong>Civil ID: </strong><span t-field="o.partner_id.email"/>
                                 </div>
                             </div>
                             
@@ -156,9 +148,11 @@
                                 </div>
                             </div>
                             
-                            <!-- Terms and Conditions -->
+                            <!-- Terms and Conditions - English and Arabic -->
                             <div class="mb-1" style="font-size: 14px;">
                                 <p class="mb-0">Please use the following communication for your payment: <span t-field="o.name"/></p>
+                                
+                                <!-- English Terms and Conditions -->
                                 <strong>TERMS &amp; CONDITIONS</strong>
                                 <p class="mb-0">• Based on receipt signed by customer with his name written agreeing on the following:</p>
                                 <p class="mb-0">I, the above-mentioned, declare that the items sold belong to me and have not been stolen or are</p>
@@ -167,6 +161,15 @@
                                 <p class="mb-0">rules, laws, and regulations etc. in the State of Kuwait. Moreover, I promise to return the full amount</p>
                                 <p class="mb-0">if the items sold are fake (inauthentic) or in custody due to them being stolen, which is a result of</p>
                                 <p class="mb-0">my fault in the end.</p>
+                                
+                                <!-- Arabic Terms and Conditions -->
+                                <div dir="rtl" style="text-align: right; margin-top: 15px;">
+                                    <strong>الشروط والأحكام</strong>
+                                    <p class="mb-0">اقر انا البائع المذكور اسمي اعلاه بان القطع المباعة من قبلي عائد لي وملكي وليس مسروق أو مقلد واستلمت القيمة بالكامل</p>
+                                    <p class="mb-0">ولا يحق لي استرجاع ماهو مباع مرة أخرى وأتحمل المسئولية الكاملة تجاه الجهات الرسمية أو الجهات القانونية في حال</p>
+                                    <p class="mb-0">ثبوت عكس ذلك او مخالفة الشروط القانونية والجزائية في دولة الكويت. واتعهد برد القيمة كاملة اذا كانت القطعة المباعة</p>
+                                    <p class="mb-0">مقلدة أو غير اصلية، أو مسروقة أو يوجد فيها عيب أو خلل.</p>
+                                </div>
                             </div>
                             
                             <!-- Signature -->
