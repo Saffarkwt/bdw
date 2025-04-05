@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- English Sales Invoice Template -->
-    <template id="report_sales_invoice_document_english">
+    <template id="report_sales_invoice_english">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
                 <t t-set="lang" t-value="o.partner_id.lang"/>
@@ -14,31 +14,37 @@
                         <div class="row mb-1">
                             <div class="col-6">
                                 <img src="/custom_invoice_templates/static/description/blue_diamond_logo.png" style="max-height: 70px;" t-if="o.company_id.logo"/>
+                                <h3 style="margin-top: 10px;">BLUE DIAMOND</h3>
                             </div>
                             <div class="col-6 text-right">
                                 <h3 style="margin-bottom: 0;">Blue Diamond الماسة الزرقاء</h3>
-                                <p style="margin-bottom: 0;">Sale - Purchase - Valuation of Precious Watches</p>
+                                <p style="margin-bottom: 0;">بيع - شراء - تثمين الساعات الثمينة</p>
                             </div>
                         </div>
                         
-                        <hr style="margin-top: 5px; margin-bottom: 5px;"/>
+                        <hr style="margin-top: 5px; margin-bottom: 15px;"/>
                         
                         <!-- Customer Information and Barcode -->
-                        <div class="row mb-1">
+                        <div class="row mb-3">
                             <div class="col-6">
-                                <!-- Left side - intentionally left empty for layout balance -->
+                                <!-- Left side intentionally left empty -->
                             </div>
                             <div class="col-6 text-right">
                                 <strong>Name : </strong><span t-field="o.partner_id"/><br/>
                                 <strong>Phone : </strong><span t-field="o.partner_id.phone"/><br/>
                                 <strong>Civil ID : </strong><span t-field="o.partner_id.email"/>
-                                
-                                <!-- Barcode and Invoice Title moved to right side -->
-                                <div class="mt-2">
-                                    <img t-att-src="'/report/barcode/Code128/'+o.name" style="width:300px;height:50px;"/>
-                                    <h3 class="mt-1 mb-0">Sales Invoice</h3>
-                                    <h4 class="mt-0 mb-1" t-field="o.name"/>
-                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Barcode section moved below customer info -->
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <img t-att-src="'/report/barcode/Code128/'+o.name" style="width:300px;height:50px;"/>
+                                <h3 class="mt-1 mb-0">Sales Invoice</h3>
+                                <h4 class="mt-0 mb-1" t-field="o.name"/>
+                            </div>
+                            <div class="col-6">
+                                <!-- Right side intentionally left empty -->
                             </div>
                         </div>
                         
@@ -200,7 +206,7 @@
     </template>
 
     <!-- Arabic Sales Invoice Template -->
-    <template id="report_sales_invoice_document_arabic">
+    <template id="report_sales_invoice_arabic">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
                 <t t-set="lang" t-value="o.partner_id.lang"/>
@@ -217,27 +223,33 @@
                             </div>
                             <div class="col-6">
                                 <img src="/custom_invoice_templates/static/description/blue_diamond_logo.png" style="max-height: 70px;" t-if="o.company_id.logo"/>
+                                <h3 style="margin-top: 10px; text-align: right;">BLUE DIAMOND</h3>
                             </div>
                         </div>
                         
-                        <hr style="margin-top: 5px; margin-bottom: 5px;"/>
+                        <hr style="margin-top: 5px; margin-bottom: 15px;"/>
                         
                         <!-- Customer Information and Barcode -->
-                        <div class="row mb-1">
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <!-- Left side intentionally left empty -->
+                            </div>
                             <div class="col-6 text-right">
-                                <!-- Barcode and Invoice Title moved to right side -->
-                                <div class="mt-2">
-                                    <img t-att-src="'/report/barcode/Code128/'+o.name" style="width:300px;height:50px;"/>
-                                    <h3 class="mt-1 mb-0">فاتورة مبيعات</h3>
-                                    <h4 class="mt-0 mb-1" t-field="o.name"/>
-                                </div>
-                                
                                 <strong>الاسم : </strong><span t-field="o.partner_id"/><br/>
                                 <strong>الهاتف : </strong><span t-field="o.partner_id.phone"/><br/>
                                 <strong>الرقم المدني : </strong><span t-field="o.partner_id.email"/>
                             </div>
+                        </div>
+                        
+                        <!-- Barcode section moved below customer info -->
+                        <div class="row mb-3">
                             <div class="col-6">
-                                <!-- Left side - intentionally left empty for layout balance -->
+                                <!-- Left side intentionally left empty -->
+                            </div>
+                            <div class="col-6 text-right">
+                                <img t-att-src="'/report/barcode/Code128/'+o.name" style="width:300px;height:50px;"/>
+                                <h3 class="mt-1 mb-0">فاتورة مبيعات</h3>
+                                <h4 class="mt-0 mb-1" t-field="o.name"/>
                             </div>
                         </div>
                         
@@ -356,15 +368,8 @@
                         
                         <!-- Terms and Conditions -->
                         <div class="mb-1" style="font-size: 14px;">
-                            <p class="mb-0">
-                                <strong>TERMS &amp; CONDITIONS</strong>
-                            </p>
-                            <p class="mb-0">1. Goods once sold are not subject to return or exchange</p>
-                            <p class="mb-0">2. Checking period is for two days from the date of the purchase</p>
-                            <p class="mb-0">3. There is no guarantee of the authenticity or the quality of the watch or parts after checking two days periods from the date of purchase.</p>
-                            <p class="mb-0">I received and examined the goods along with its sets, and I am aware of their condition, and I do not have the right to claim for any refund or whats so ever in the event of a defect after the examination period. In the end, the appreciation is due to the "Blue Diamond" decision accordance with the laws and regulations in force in Kuwait for non-refundable watches, jewelry and gold.</p>
+                            <p class="text-right mb-0">يرجى استخدام المرجع التالي للدفع : <span t-field="o.name"/></p>
                             
-                            <p class="mb-0 text-right">يرجى استخدام الرقم التالي للدفع: <span t-field="o.name"/></p>
                             <p class="text-right mb-0">
                                 <strong>الشروط والاحكام</strong>
                             </p>
@@ -380,6 +385,12 @@
                             <p class="text-right mb-0">
                                 استلمت وعاينت البضاعة وملحقاتها وعلمي بحالتها ولا يحق لي الرجوع بمطالبة استردادها في حال وجود عيب بعد مدة الفحص. ويرجع التقدير للماسة الزرقاء وفقا للقوانين واللوائح المعمولة بالكويت للساعات والمجوهرات والذهب الغير قابلة للرد
                             </p>
+                            
+                            <strong>TERMS &amp; CONDITIONS</strong>
+                            <p class="mb-0">1. Goods once sold are not subject to return or exchange</p>
+                            <p class="mb-0">2. Checking period is for two days from the date of the purchase</p>
+                            <p class="mb-0">3. There is no guarantee of the authenticity or the quality of the watch or parts after checking two days periods from the date of purchase.</p>
+                            <p class="mb-0">I received and examined the goods along with its sets, and I am aware of their condition, and I do not have the right to claim for any refund or whats so ever in the event of a defect after the examination period. In the end, the appreciation is due to the "Blue Diamond" decision accordance with the laws and regulations in force in Kuwait for non-refundable watches, jewelry and gold.</p>
                         </div>
                         
                         <!-- Signature -->
@@ -400,7 +411,7 @@
     </template>
 
     <!-- English Purchase Invoice Template -->
-    <template id="report_purchase_invoice_document_english">
+    <template id="report_purchase_invoice_english">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
                 <t t-set="lang" t-value="o.partner_id.lang"/>
@@ -413,31 +424,37 @@
                         <div class="row mb-1">
                             <div class="col-6">
                                 <img src="/custom_invoice_templates/static/description/blue_diamond_logo.png" style="max-height: 70px;" t-if="o.company_id.logo"/>
+                                <h3 style="margin-top: 10px;">BLUE DIAMOND</h3>
                             </div>
                             <div class="col-6 text-right">
                                 <h3 style="margin-bottom: 0;">Blue Diamond الماسة الزرقاء</h3>
-                                <p style="margin-bottom: 0;">Sale - Purchase - Valuation of Precious Watches</p>
+                                <p style="margin-bottom: 0;">بيع - شراء - تثمين الساعات الثمينة</p>
                             </div>
                         </div>
                         
-                        <hr style="margin-top: 5px; margin-bottom: 5px;"/>
+                        <hr style="margin-top: 5px; margin-bottom: 15px;"/>
                         
-                        <!-- Customer Information and Barcode -->
-                        <div class="row mb-1">
+                        <!-- Vendor Information and Barcode -->
+                        <div class="row mb-3">
                             <div class="col-6">
-                                <!-- Left side - intentionally left empty for layout balance -->
+                                <!-- Left side intentionally left empty -->
                             </div>
                             <div class="col-6 text-right">
                                 <strong>Name : </strong><span t-field="o.partner_id"/><br/>
                                 <strong>Phone : </strong><span t-field="o.partner_id.phone"/><br/>
                                 <strong>Civil ID : </strong><span t-field="o.partner_id.email"/>
-                                
-                                <!-- Barcode and Invoice Title moved to right side -->
-                                <div class="mt-2">
-                                    <img t-att-src="'/report/barcode/Code128/'+o.name" style="width:300px;height:50px;"/>
-                                    <h3 class="mt-1 mb-0">Purchase Invoice</h3>
-                                    <h4 class="mt-0 mb-1" t-field="o.name"/>
-                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Barcode section moved below vendor info -->
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <img t-att-src="'/report/barcode/Code128/'+o.name" style="width:300px;height:50px;"/>
+                                <h3 class="mt-1 mb-0">Purchase Invoice</h3>
+                                <h4 class="mt-0 mb-1" t-field="o.name"/>
+                            </div>
+                            <div class="col-6">
+                                <!-- Right side intentionally left empty -->
                             </div>
                         </div>
                         
@@ -535,9 +552,15 @@
                             </div>
                             <div class="col-6">
                                 <table class="table table-sm table-bordered mb-1" style="page-break-inside: avoid; font-size: 14px;">
-                                    <tr style="background-color: #f8f9fa;">
-                                        <td class="text-right" style="width: 70%;"><strong>Total</strong></td>
+                                    <tr>
+                                        <td class="text-right" style="width: 70%;"><strong>Untaxed Amount</strong></td>
                                         <td class="text-right" style="width: 30%;">
+                                            <span t-field="o.amount_untaxed"/> <span t-field="o.currency_id.symbol"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="background-color: #f8f9fa;">
+                                        <td class="text-right"><strong>Total</strong></td>
+                                        <td class="text-right">
                                             <span t-field="o.amount_total"/> <span t-field="o.currency_id.symbol"/>
                                         </td>
                                     </tr>
@@ -551,15 +574,27 @@
                         
                         <!-- Terms and Conditions -->
                         <div class="mb-1" style="font-size: 14px;">
+                            <p class="mb-0">Please use the following communication for your payment : <span t-field="o.name"/></p>
                             <strong>TERMS &amp; CONDITIONS</strong>
-                            <p class="mb-0">Based on receipt signed by customer with his name written agreeing on the following:</p>
-                            <p class="mb-0">I Above-mentioned, declare that the items sold belong to me and it's not been stolen or its inauthentic, and I have received amount paid in full, and don't have any rights to take the items back after I sell… Additionally I will take full responsibilities in case of violation in complying with rules, laws, and regulation etc. in State of Kuwait. Moreover, I promise to return amount in full whether items sold is fake (inauthentic) or in custody due to it was stolen, which is resulted of my fault in the end.</p>
+                            <p class="mb-0">1. Goods once sold are not subject to return or exchange</p>
+                            <p class="mb-0">2. Checking period is for two days from the date of the purchase</p>
+                            <p class="mb-0">3. There is no guarantee of the authenticity or the quality of the watch or parts after checking two days periods from the date of purchase.</p>
+                            <p class="mb-0">I received and examined the goods along with its sets, and I am aware of their condition, and I do not have the right to claim for any refund or whats so ever in the event of a defect after the examination period. In the end, the appreciation is due to the "Blue Diamond" decision accordance with the laws and regulations in force in Kuwait for non-refundable watches, jewelry and gold.</p>
                             
                             <p class="text-right mb-0">
                                 <strong>الشروط والاحكام</strong>
                             </p>
                             <p class="text-right mb-0">
-                                اقر انا البائع المذكور اسمي اعلاه بان القطع المباعة من قبلي عائد لي وملكي وليس مسروق أو مقلد واستلمت القيمة بالكامل ولا يحق لي استرجاع ماهو مباع مرة أخرى وأتحمل المسئولية الكاملة تجاه الجهات الرسمية أو الجهات القانونية في حال ثبوت عكس ذلك او مخالفة الشروط القانونية والجزائية في دولة الكويت. واتعهد برد القيمة كاملة اذا كانت القطعة المباعة مقلدة أو غير اصلية، أو مسروقة أو يوجد فيها عيب أو خلل.
+                                1. البضاعة المباعة لاترد ولاتستبدل
+                            </p>
+                            <p class="text-right mb-0">
+                                2. مدة الفحص يومين من تاريخ الشراء
+                            </p>
+                            <p class="text-right mb-0">
+                                3. لا يوجد ضمان باصلية أو جودة البضاعة بعد مدة الفحص يومين من تاريخ الشراء
+                            </p>
+                            <p class="text-right mb-0">
+                                استلمت وعاينت البضاعة وملحقاتها وعلمي بحالتها ولا يحق لي الرجوع بمطالبة استردادها في حال وجود عيب بعد مدة الفحص. ويرجع التقدير للماسة الزرقاء وفقا للقوانين واللوائح المعمولة بالكويت للساعات والمجوهرات والذهب الغير قابلة للرد
                             </p>
                         </div>
                         
@@ -581,7 +616,7 @@
     </template>
 
     <!-- Arabic Purchase Invoice Template -->
-    <template id="report_purchase_invoice_document_arabic">
+    <template id="report_purchase_invoice_arabic">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
                 <t t-set="lang" t-value="o.partner_id.lang"/>
@@ -598,27 +633,33 @@
                             </div>
                             <div class="col-6">
                                 <img src="/custom_invoice_templates/static/description/blue_diamond_logo.png" style="max-height: 70px;" t-if="o.company_id.logo"/>
+                                <h3 style="margin-top: 10px; text-align: right;">BLUE DIAMOND</h3>
                             </div>
                         </div>
                         
-                        <hr style="margin-top: 5px; margin-bottom: 5px;"/>
+                        <hr style="margin-top: 5px; margin-bottom: 15px;"/>
                         
-                        <!-- Customer Information and Barcode -->
-                        <div class="row mb-1">
+                        <!-- Vendor Information and Barcode -->
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <!-- Left side intentionally left empty -->
+                            </div>
                             <div class="col-6 text-right">
-                                <!-- Barcode and Invoice Title moved to right side -->
-                                <div class="mt-2">
-                                    <img t-att-src="'/report/barcode/Code128/'+o.name" style="width:300px;height:50px;"/>
-                                    <h3 class="mt-1 mb-0">فاتورة مشتريات</h3>
-                                    <h4 class="mt-0 mb-1" t-field="o.name"/>
-                                </div>
-                                
                                 <strong>الاسم : </strong><span t-field="o.partner_id"/><br/>
                                 <strong>الهاتف : </strong><span t-field="o.partner_id.phone"/><br/>
                                 <strong>الرقم المدني : </strong><span t-field="o.partner_id.email"/>
                             </div>
+                        </div>
+                        
+                        <!-- Barcode section moved below vendor info -->
+                        <div class="row mb-3">
                             <div class="col-6">
-                                <!-- Left side - intentionally left empty for layout balance -->
+                                <!-- Left side intentionally left empty -->
+                            </div>
+                            <div class="col-6 text-right">
+                                <img t-att-src="'/report/barcode/Code128/'+o.name" style="width:300px;height:50px;"/>
+                                <h3 class="mt-1 mb-0">فاتورة مشتريات</h3>
+                                <h4 class="mt-0 mb-1" t-field="o.name"/>
                             </div>
                         </div>
                         
@@ -719,11 +760,17 @@
                             </div>
                             <div class="col-6">
                                 <table class="table table-sm table-bordered mb-1" style="page-break-inside: avoid; font-size: 14px;">
-                                    <tr style="background-color: #f8f9fa;">
+                                    <tr>
                                         <td class="text-right" style="width: 30%;">
+                                            <span t-field="o.amount_untaxed"/> <span t-field="o.currency_id.symbol"/>
+                                        </td>
+                                        <td class="text-right" style="width: 70%;"><strong>المبلغ قبل الضريبة</strong></td>
+                                    </tr>
+                                    <tr style="background-color: #f8f9fa;">
+                                        <td class="text-right">
                                             <span t-field="o.amount_total"/> <span t-field="o.currency_id.symbol"/>
                                         </td>
-                                        <td class="text-right" style="width: 70%;"><strong>الإجمالي</strong></td>
+                                        <td class="text-right"><strong>الإجمالي</strong></td>
                                     </tr>
                                 </table>
                             </div>
@@ -731,18 +778,29 @@
                         
                         <!-- Terms and Conditions -->
                         <div class="mb-1" style="font-size: 14px;">
-                            <p class="mb-0">
-                                <strong>TERMS &amp; CONDITIONS</strong>
-                            </p>
-                            <p class="mb-0">Based on receipt signed by customer with his name written agreeing on the following:</p>
-                            <p class="mb-0">I Above-mentioned, declare that the items sold belong to me and it's not been stolen or its inauthentic, and I have received amount paid in full, and don't have any rights to take the items back after I sell… Additionally I will take full responsibilities in case of violation in complying with rules, laws, and regulation etc. in State of Kuwait. Moreover, I promise to return amount in full whether items sold is fake (inauthentic) or in custody due to it was stolen, which is resulted of my fault in the end.</p>
+                            <p class="text-right mb-0">يرجى استخدام المرجع التالي للدفع : <span t-field="o.name"/></p>
                             
                             <p class="text-right mb-0">
                                 <strong>الشروط والاحكام</strong>
                             </p>
                             <p class="text-right mb-0">
-                                اقر انا البائع المذكور اسمي اعلاه بان القطع المباعة من قبلي عائد لي وملكي وليس مسروق أو مقلد واستلمت القيمة بالكامل ولا يحق لي استرجاع ماهو مباع مرة أخرى وأتحمل المسئولية الكاملة تجاه الجهات الرسمية أو الجهات القانونية في حال ثبوت عكس ذلك او مخالفة الشروط القانونية والجزائية في دولة الكويت. واتعهد برد القيمة كاملة اذا كانت القطعة المباعة مقلدة أو غير اصلية، أو مسروقة أو يوجد فيها عيب أو خلل.
+                                1. البضاعة المباعة لاترد ولاتستبدل
                             </p>
+                            <p class="text-right mb-0">
+                                2. مدة الفحص يومين من تاريخ الشراء
+                            </p>
+                            <p class="text-right mb-0">
+                                3. لا يوجد ضمان باصلية أو جودة البضاعة بعد مدة الفحص يومين من تاريخ الشراء
+                            </p>
+                            <p class="text-right mb-0">
+                                استلمت وعاينت البضاعة وملحقاتها وعلمي بحالتها ولا يحق لي الرجوع بمطالبة استردادها في حال وجود عيب بعد مدة الفحص. ويرجع التقدير للماسة الزرقاء وفقا للقوانين واللوائح المعمولة بالكويت للساعات والمجوهرات والذهب الغير قابلة للرد
+                            </p>
+                            
+                            <strong>TERMS &amp; CONDITIONS</strong>
+                            <p class="mb-0">1. Goods once sold are not subject to return or exchange</p>
+                            <p class="mb-0">2. Checking period is for two days from the date of the purchase</p>
+                            <p class="mb-0">3. There is no guarantee of the authenticity or the quality of the watch or parts after checking two days periods from the date of purchase.</p>
+                            <p class="mb-0">I received and examined the goods along with its sets, and I am aware of their condition, and I do not have the right to claim for any refund or whats so ever in the event of a defect after the examination period. In the end, the appreciation is due to the "Blue Diamond" decision accordance with the laws and regulations in force in Kuwait for non-refundable watches, jewelry and gold.</p>
                         </div>
                         
                         <!-- Signature -->
@@ -757,47 +815,6 @@
                             </div>
                         </div>
                     </div>
-                </t>
-            </t>
-        </t>
-    </template>
-
-    <!-- Template Selectors -->
-    <template id="report_sales_invoice_english">
-        <t t-call="web.html_container">
-            <t t-foreach="docs" t-as="o">
-                <t t-if="o.move_type == 'out_invoice'">
-                    <t t-call="custom_invoice_templates.report_sales_invoice_document_english" t-lang="o.partner_id.lang"/>
-                </t>
-            </t>
-        </t>
-    </template>
-
-    <template id="report_sales_invoice_arabic">
-        <t t-call="web.html_container">
-            <t t-foreach="docs" t-as="o">
-                <t t-if="o.move_type == 'out_invoice'">
-                    <t t-call="custom_invoice_templates.report_sales_invoice_document_arabic" t-lang="o.partner_id.lang"/>
-                </t>
-            </t>
-        </t>
-    </template>
-
-    <template id="report_purchase_invoice_english">
-        <t t-call="web.html_container">
-            <t t-foreach="docs" t-as="o">
-                <t t-if="o.move_type == 'in_invoice'">
-                    <t t-call="custom_invoice_templates.report_purchase_invoice_document_english" t-lang="o.partner_id.lang"/>
-                </t>
-            </t>
-        </t>
-    </template>
-
-    <template id="report_purchase_invoice_arabic">
-        <t t-call="web.html_container">
-            <t t-foreach="docs" t-as="o">
-                <t t-if="o.move_type == 'in_invoice'">
-                    <t t-call="custom_invoice_templates.report_purchase_invoice_document_arabic" t-lang="o.partner_id.lang"/>
                 </t>
             </t>
         </t>
