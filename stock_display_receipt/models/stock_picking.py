@@ -4,4 +4,10 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     def print_display_receipt(self):
-        return self.env.ref('stock_display_receipt.action_display_receipt_report').report_action(self)
+        return {
+            'type': 'ir.actions.report',
+            'report_name': 'stock_display_receipt.report_display_receipt',
+            'report_type': 'qweb-pdf',
+            'model': 'stock.picking',
+            'res_ids': self.ids,
+        }
