@@ -6,5 +6,6 @@
     <field name="report_name">stock_display_receipt.report_display_receipt</field>
     <field name="report_file">stock_display_receipt.report_display_receipt</field>
     <field name="print_report_name">(object.name or 'Display Receipt')</field>
+    <field name="report_context">{'docids': active_ids}</field>
   </record>
 </odoo>
