@@ -1,11 +1,9 @@
 <odoo>
-  <record id="action_display_receipt_report" model="ir.actions.report">
-    <field name="name">Display Receipt DEBUG</field>
-    <field name="model">stock.picking</field>
-    <field name="report_type">qweb-pdf</field>
-    <field name="report_name">stock_display_receipt.report_display_receipt</field>
-    <field name="report_file">stock_display_receipt.report_display_receipt</field>
-    <field name="print_report_name">(object.name or 'Display Receipt')</field>
-    <field name="report_context">{'docids': active_ids}</field>
-  </record>
+  <report
+    id="action_display_receipt_report"
+    model="stock.picking"
+    string="Display Receipt"
+    name="stock_display_receipt.report_display_receipt"
+    file="stock_display_receipt.report_display_receipt"
+    report_type="qweb-pdf"/>
 </odoo>

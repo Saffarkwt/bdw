@@ -8,8 +8,7 @@
         <button name="print_display_receipt"
                 type="object"
                 string="طباعة سند الاستلام"
-                class="btn-primary"
-                context="{ 'report_type': 'pdf' }"/>
+                class="btn-primary"/>
       </xpath>
     </field>
   </record>
