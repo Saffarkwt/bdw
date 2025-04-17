@@ -1,9 +1,9 @@
 <odoo>
   <template id="report_display_receipt">
     <t t-call="web.external_layout">
-      <t t-if="doc">
-        <t t-set="o" t-value="doc"/>
-        <div class="page">
+      <div class="page">
+        <t t-if="doc">
+          <t t-set="o" t-value="doc"/>
           <div class="text-center">
             <h2>Display Receipt</h2>
             <h3>سند استلام</h3>
@@ -63,13 +63,11 @@
             <br/>
             Kuwait City - Alawqaf Complex – Ground Floor- Shop No. 156-158- Kuwait. Tel: +965 22417500
           </div>
-        </div>
-      </t>
-      <t t-else="">
-        <div class="page">
+        </t>
+        <t t-else="">
           <h2 style="color:red">No picking record selected!</h2>
-        </div>
-      </t>
+        </t>
+      </div>
     </t>
   </template>
 </odoo>
