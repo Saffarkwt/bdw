@@ -5,11 +5,11 @@
     <field name="inherit_id" ref="stock.view_picking_form"/>
     <field name="arch" type="xml">
       <xpath expr="//header" position="inside">
-        <button name="print_display_receipt"
-                type="object"
+        <button name="action_display_receipt_report"
+                type="ir.actions.report"
                 string="طباعة سند الاستلام"
                 class="btn-primary"
-                context="{ 'report_type': 'pdf' }"/>
+                context="{'model': 'stock.picking', 'report_type': 'qweb-pdf'}"/>
       </xpath>
     </field>
   </record>
