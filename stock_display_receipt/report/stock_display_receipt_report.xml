@@ -1,0 +1,11 @@
+<odoo>
+  <report
+    id="action_display_receipt_report"
+    model="stock.picking"
+    string="Display Receipt"
+    report_type="qweb-pdf"
+    name="stock_display_receipt.report_display_receipt"
+    file="stock_display_receipt.report_display_receipt"
+    print_report_name="(object.name or 'Display Receipt')"
+  />
+</odoo>
