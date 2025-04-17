@@ -1,6 +1,7 @@
 <odoo>
   <template id="report_display_receipt">
     <t t-call="web.external_layout">
+      <t t-set="o" t-value="doc"/>
       <div class="page">
         <div class="text-center">
           <h2>Display Receipt</h2>
