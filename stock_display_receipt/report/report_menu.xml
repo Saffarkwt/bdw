@@ -1,6 +1,5 @@
 <odoo>
-  <!-- Action مرتبطة بالتقرير -->
-  <record id="action_display_receipt_report_manual" model="ir.actions.report">
+  <record id="action_display_receipt_report" model="ir.actions.report">
     <field name="name">طباعة سند الاستلام</field>
     <field name="model">stock.picking</field>
     <field name="report_type">qweb-pdf</field>
