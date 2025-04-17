@@ -1,0 +1,67 @@
+<odoo>
+  <template id="report_display_receipt">
+    <t t-call="web.external_layout">
+      <div class="page">
+        <div class="text-center">
+          <h2>Display Receipt</h2>
+          <h3>سند استلام</h3>
+        </div>
+
+        <div>
+          <strong>Name:</strong> <span t-field="o.partner_id.name"/>
+          <br/>
+          <strong>Phone:</strong> <span t-field="o.partner_id.phone"/>
+          <br/>
+          <strong>Civil ID:</strong> <span t-field="o.partner_id.vat"/>
+        </div>
+
+        <table class="table table-sm mt16" style="width: 100%; border: 1px solid black;">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Description</th>
+              <th>Serial No</th>
+              <th>Model No</th>
+              <th>Quantity</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <t t-set="idx" t-value="0"/>
+            <t t-foreach="o.move_ids_without_package" t-as="line">
+              <tr>
+                <td><t t-esc="idx + 1"/></td>
+                <td><t t-esc="line.name"/></td>
+                <td><t t-esc="line.lot_ids and line.lot_ids[0].name or ''"/></td>
+                <td><t t-esc="line.product_id.default_code or ''"/></td>
+                <td><t t-esc="line.quantity_done"/></td>
+                <td><t t-esc="line.price_unit if line.price_unit else 0.0"/></td>
+              </tr>
+            </t>
+          </tbody>
+        </table>
+
+        <div class="mt16">
+          <strong>Total Amount:</strong> <span t-esc="o.amount_total or 0.0"/> ك.د
+          <br/>
+          <strong>Total Amount in Words:</strong> <span>Two Thousand, Four Hundred Dinar</span>
+        </div>
+
+        <div class="mt16" style="font-size: 10px">
+          <p>شروط وأحكام ... (ضع نص الشروط هنا)</p>
+        </div>
+
+        <div class="mt32">
+          <p>الاسم: ________________</p>
+          <p>التوقيع: ________________</p>
+        </div>
+
+        <div class="text-center mt32" style="font-size: 10px">
+          Blue Diamond 
+          <br/>
+          Kuwait City - Alawqaf Complex – Ground Floor- Shop No. 156-158- Kuwait. Tel: +965 22417500
+        </div>
+      </div>
+    </t>
+  </template>
+</odoo>
