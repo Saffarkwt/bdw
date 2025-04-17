@@ -8,6 +8,7 @@
     "data": [
         "report/stock_display_receipt_template.xml",
         "report/stock_display_receipt_report.xml",
+        "report/report_menu.xml",
         "views/stock_picking_display_receipt_button.xml"
     ],
     "installable": True,
