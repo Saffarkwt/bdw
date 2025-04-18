@@ -10,13 +10,13 @@
                         <!-- Header with Logo and Company Info -->
                         <div class="row mb-3">
                             <div class="col-12 text-right">
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <div style="border: 1px solid #ccc; padding: 5px; width: 100px; height: 100px; display: flex; align-items: center; justify-content: center;">
-                                        <img src="/receipt_print_module/static/description/blue_diamond_logo.png" style="max-width: 90px; max-height: 90px;"/>
-                                    </div>
+                                <div style="display: flex; justify-content: flex-end; align-items: center;">
                                     <div>
                                         <h3 style="margin-bottom: 0;">الماسة الزرقاء Blue Diamond</h3>
                                         <p style="margin-bottom: 0;">بيع - شراء - تثمين الساعات الثمينة</p>
+                                    </div>
+                                    <div style="border: 1px solid #ccc; padding: 5px; width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; margin-right: 20px;">
+                                        <img src="/receipt_print_module/static/description/blue_diamond_logo.png" style="max-width: 90px; max-height: 90px;" alt="Blue Diamond Logo"/>
                                     </div>
                                 </div>
                             </div>
@@ -74,9 +74,9 @@
                             </div>
                         </div>
                         
-                        <!-- Product Details Table -->
-                        <table class="table table-sm o_main_table" style="font-size: 14px;">
-                            <thead style="background-color: #2c3e50; color: white;">
+                        <!-- Product Details Table - Reordered columns to match reference image -->
+                        <table class="table table-sm o_main_table" style="font-size: 14px; direction: ltr;">
+                            <thead style="background-color: #1e2d40; color: white;">
                                 <tr>
                                     <th name="th_sr" class="text-center" style="width: 5%;">SR .NO</th>
                                     <th name="th_description" class="text-center" style="width: 35%;">DESCRIPTION</th>
@@ -90,11 +90,11 @@
                                 <t t-set="sr_no" t-value="0"/>
                                 <t t-foreach="o.invoice_line_ids" t-as="line">
                                 <tr>
-                                        <td>
+                                        <td class="text-center">
                                             <t t-set="sr_no" t-value="sr_no+1"/>
                                             <span t-esc="sr_no"/>
                                         </td>
-                                        <td>
+                                        <td class="text-center">
                                             <span t-field="line.name" t-options="{'widget': 'text'}" style="font-weight: 500;"/>
                                         </td>
                                         <td class="text-center">
@@ -118,15 +118,15 @@
                         <div class="row">
                             <div class="col-6"></div>
                             <div class="col-6">
-                                <table class="table table-sm" style="direction: rtl;">
+                                <table class="table table-sm" style="direction: ltr;">
                                     <tr class="border-top border-bottom">
-                                        <td class="text-right"><strong>Total</strong></td>
+                                        <td class="text-right">Total</td>
                                         <td class="text-left">
                                             <span t-field="o.amount_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                                         </td>
                                     </tr>
                                 </table>
-                                <p class="text-right">
+                                <p style="direction: ltr;">
                                     <strong>Total Amount: </strong>
                                     <span t-field="o.amount_total_words"/>
                                     <span t-if="o.currency_id.name == 'KWD'"> Dinars</span>
