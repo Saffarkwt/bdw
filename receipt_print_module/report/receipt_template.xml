@@ -4,48 +4,53 @@
     <template id="report_receipt">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
-                <t t-call="web.external_layout">
-                    <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
-                    
-                    <!-- Header with Logo and Company Info -->
-                    <div class="row mb-3">
-                        <div class="col-12 text-right">
-                            <h3 style="margin-bottom: 0;">الماسة الزرقاء Blue Diamond</h3>
-                            <p style="margin-bottom: 0;">بيع - شراء - تثمين الساعات الثمينة</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Customer Information -->
-                    <div class="row mb-3">
-                        <div class="col-12 text-right">
-                            <strong>Name : </strong><span t-field="o.partner_id.name"/><br/>
-                            <strong>Phone : </strong><span t-field="o.partner_id.phone"/><br/>
-                            <strong>Civil ID : </strong>
-                            <t t-if="o.partner_id.civil_id">
-                                <span t-field="o.partner_id.civil_id"/>
-                            </t>
-                            <t t-elif="o.partner_id.vat">
-                                <span t-field="o.partner_id.vat"/>
-                            </t>
-                            <t t-elif="o.partner_id.ref">
-                                <span t-field="o.partner_id.ref"/>
-                            </t>
-                            <t t-else="">
-                                <span t-esc="o.partner_id.id"/>
-                            </t>
-                        </div>
-                    </div>
-                    
+                <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
+                <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
                     <div class="page" style="font-size: 16px; background-color: #f5f9f5; direction: rtl;">
+                        <!-- Header with Logo and Company Info -->
+                        <div class="row mb-3">
+                            <div class="col-12 text-right" style="border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 15px;">
+                                <h3 style="margin-bottom: 0;">الماسة الزرقاء Blue Diamond</h3>
+                                <p style="margin-bottom: 0;">بيع - شراء - تثمين الساعات الثمينة</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Customer Information -->
+                        <div class="row mb-3">
+                            <div class="col-12 text-right" style="padding: 10px; background-color: #f8f9fa; border-radius: 5px;">
+                                <strong>Name : </strong><span t-field="o.partner_id.name"/><br/>
+                                <strong>Phone : </strong><span t-field="o.partner_id.phone"/><br/>
+                                <strong>Civil ID : </strong>
+                                <t t-if="o.partner_id.civil_id">
+                                    <span t-field="o.partner_id.civil_id"/>
+                                </t>
+                                <t t-elif="o.partner_id.vat">
+                                    <span t-field="o.partner_id.vat"/>
+                                </t>
+                                <t t-elif="o.partner_id.ref">
+                                    <span t-field="o.partner_id.ref"/>
+                                </t>
+                                <t t-else="">
+                                    <span t-esc="o.partner_id.id"/>
+                                </t>
+                            </div>
+                        </div>
+                        
                         <!-- Barcode and Receipt Title -->
                         <div class="row mb-4">
                             <div class="col-6">
                                 <!-- Left side intentionally left empty -->
                             </div>
                             <div class="col-6 text-left" style="direction: ltr;">
-                                <img t-att-src="'/report/barcode/Code128/'+o.name" style="width:300px;height:50px;"/>
-                                <h3 class="mt-1 mb-0">Display Receipt</h3>
-                                <h4 class="mt-0 mb-1" t-field="o.name"/>
+                                <t t-if="o and o.name">
+                                    <img t-att-src="'/report/barcode/Code128/'+o.name" style="width:300px;height:50px;"/>
+                                    <h3 class="mt-1 mb-0">Display Receipt</h3>
+                                    <h4 class="mt-0 mb-1" t-field="o.name"/>
+                                </t>
+                                <t t-else="">
+                                    <h3 class="mt-1 mb-0">Display Receipt</h3>
+                                    <h4 class="mt-0 mb-1">Draft</h4>
+                                </t>
                             </div>
                         </div>
                         
@@ -53,11 +58,12 @@
                         <div class="row mb-3">
                             <div class="col-6">
                                 <strong>Created By:</strong>
-                                <p class="m-0" t-field="o.user_id"/>
+                                <p class="m-0" t-field="o.user_id" t-options="{'widget': 'contact', 'fields': ['name']}"/>
                             </div>
                             <div class="col-6 text-right">
                                 <strong>Source:</strong>
-                                <p class="m-0" t-field="o.invoice_origin"/>
+                                <p class="m-0" t-if="o.invoice_origin" t-field="o.invoice_origin"/>
+                                <p class="m-0" t-else="">-</p>
                             </div>
                         </div>
                         
@@ -154,7 +160,7 @@
                             </div>
                         </div>
                     </div>
-                </t>
+                </div>
             </t>
         </t>
     </template>
