@@ -6,7 +6,7 @@
     'author': 'YourCompany',
     'depends': ['stock'],
     'data': [
-        'security/ir.model.access.csv',
+        
         'report/display_receipt_template.xml',
         'report/report_action.xml',
         'views/menu.xml',
