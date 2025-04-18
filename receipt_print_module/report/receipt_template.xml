@@ -6,18 +6,25 @@
             <t t-foreach="docs" t-as="o">
                 <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
                 <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
-                    <div class="page" style="font-size: 16px; background-color: #f5f9f5; direction: rtl;">
+                    <div class="page" style="font-size: 16px; background-color: #e8f5e9; direction: rtl;">
                         <!-- Header with Logo and Company Info -->
                         <div class="row mb-3">
-                            <div class="col-12 text-right" style="border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 15px;">
-                                <h3 style="margin-bottom: 0;">الماسة الزرقاء Blue Diamond</h3>
-                                <p style="margin-bottom: 0;">بيع - شراء - تثمين الساعات الثمينة</p>
+                            <div class="col-12 text-right">
+                                <div style="display: flex; justify-content: flex-end; align-items: center;">
+                                    <div style="margin-left: 15px;">
+                                        <h3 style="margin-bottom: 0;">الماسة الزرقاء Blue Diamond</h3>
+                                        <p style="margin-bottom: 0;">بيع - شراء - تثمين الساعات الثمينة</p>
+                                    </div>
+                                    <div style="border: 1px solid #ccc; padding: 5px; width: 100px; height: 100px; display: flex; align-items: center; justify-content: center;">
+                                        <img src="/receipt_print_module/static/description/blue_diamond_logo.png" style="max-width: 90px; max-height: 90px;"/>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
                         <!-- Customer Information -->
                         <div class="row mb-3">
-                            <div class="col-12 text-right" style="padding: 10px; background-color: #f8f9fa; border-radius: 5px;">
+                            <div class="col-12 text-right" style="padding: 10px; background-color: rgba(255, 255, 255, 0.7); border-radius: 5px;">
                                 <strong>Name : </strong><span t-field="o.partner_id.name"/><br/>
                                 <strong>Phone : </strong><span t-field="o.partner_id.phone"/><br/>
                                 <strong>Civil ID : </strong>
@@ -69,36 +76,35 @@
                         
                         <!-- Product Details Table -->
                         <table class="table table-sm table-bordered" style="font-size: 14px;">
-                            <thead style="background-color: #f8f9fa;">
+                            <thead style="background-color: #2c3e50; color: white;">
                                 <tr>
-                                    <th class="text-left" style="width: 5%;">Sr no.</th>
-                                    <th class="text-left" style="width: 35%;">Description</th>
-                                    <th class="text-left" style="width: 15%;">Serial No</th>
-                                    <th class="text-left" style="width: 15%;">Model No</th>
-                                    <th class="text-right" style="width: 15%;">Quantity</th>
-                                    <th class="text-right" style="width: 15%;">Amount</th>
+                                    <th class="text-center" style="width: 5%;">SR .NO</th>
+                                    <th class="text-center" style="width: 35%;">DESCRIPTION</th>
+                                    <th class="text-center" style="width: 15%;">SERIAL NO</th>
+                                    <th class="text-center" style="width: 15%;">MODEL NO</th>
+                                    <th class="text-center" style="width: 15%;">QUANTITY</th>
+                                    <th class="text-center" style="width: 15%;">AMOUNT</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <t t-set="sr_no" t-value="0"/>
                                 <t t-foreach="o.invoice_line_ids" t-as="line">
-                                    <tr>
+                                <tr>
                                         <td>
                                             <t t-set="sr_no" t-value="sr_no+1"/>
                                             <span t-esc="sr_no"/>
                                         </td>
                                         <td>
-                                            <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                                            <span t-field="line.name" t-options="{'widget': 'text'}" style="font-weight: 500;"/>
                                         </td>
-                                        <td class="text-left">
+                                        <td class="text-center">
                                             <span t-field="line.product_id.barcode"/>
                                         </td>
-                                        <td class="text-left">
+                                        <td class="text-center">
                                             <span t-field="line.product_id.default_code"/>
                                         </td>
-                                        <td class="text-right">
-                                            <span t-field="line.quantity"/>
-                                            <span t-field="line.product_uom_id" groups="uom.group_uom"/>
+                                        <td class="text-center">
+                                            Units <span t-field="line.quantity"/>
                                         </td>
                                         <td class="text-right">
                                             <span t-field="line.price_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
@@ -113,7 +119,7 @@
                             <div class="col-6"></div>
                             <div class="col-6">
                                 <table class="table table-sm">
-                                    <tr>
+                                    <tr class="border-top border-bottom">
                                         <td class="text-right"><strong>Total</strong></td>
                                         <td class="text-right">
                                             <span t-field="o.amount_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
@@ -123,6 +129,7 @@
                                 <p class="text-right">
                                     <strong>Total Amount: </strong>
                                     <span t-field="o.amount_total_words"/>
+                                    <span t-if="o.currency_id.name == 'KWD'"> Dinars</span>
                                 </p>
                             </div>
                         </div>
