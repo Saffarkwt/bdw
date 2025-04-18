@@ -6,25 +6,26 @@
             <t t-foreach="docs" t-as="o">
                 <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
                 <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
-                    <div class="page" style="font-size: 16px; background-color: #e8f5e9; direction: rtl;">
-                        <!-- Header with Logo and Company Info -->
-                        <div class="row mb-3">
-                            <div class="col-12 text-right">
-                                <div style="display: flex; justify-content: flex-end; align-items: center;">
-                                    <div>
-                                        <h3 style="margin-bottom: 0;">الماسة الزرقاء Blue Diamond</h3>
-                                        <p style="margin-bottom: 0;">بيع - شراء - تثمين الساعات الثمينة</p>
-                                    </div>
-                                    <div style="border: 1px solid #ccc; padding: 5px; width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; margin-right: 20px;">
-                                        <img src="/receipt_print_module/static/description/blue_diamond_logo.png" style="max-width: 90px; max-height: 90px;" alt="Blue Diamond Logo"/>
-                                    </div>
-                                </div>
+                    <div class="page" style="font-size: 16px;">
+                        <!-- Header with Logo and Company Info - Copied exactly from purchase invoice template -->
+                        <div class="row mb-1">
+                            <div class="col-6">
+                                <img src="/receipt_print_module/static/description/blue_diamond_logo.png" style="max-height: 70px;" alt="Blue Diamond Logo"/>
+                            </div>
+                            <div class="col-6 text-right">
+                                <h3 style="margin-bottom: 0;">Blue Diamond الماسة الزرقاء</h3>
+                                <p style="margin-bottom: 0;">Sale - Purchase - Valuation of Precious Watches</p>
                             </div>
                         </div>
                         
+                        <hr style="margin-top: 5px; margin-bottom: 5px;"/>
+                        
                         <!-- Customer Information -->
                         <div class="row mb-3">
-                            <div class="col-12 text-right" style="padding: 10px; background-color: rgba(255, 255, 255, 0.7); border-radius: 5px;">
+                            <div class="col-6">
+                                <!-- Left side intentionally left empty -->
+                            </div>
+                            <div class="col-6 text-right">
                                 <strong>Name : </strong><span t-field="o.partner_id.name"/><br/>
                                 <strong>Phone : </strong><span t-field="o.partner_id.phone"/><br/>
                                 <strong>Civil ID : </strong>
@@ -44,11 +45,8 @@
                         </div>
                         
                         <!-- Barcode and Receipt Title -->
-                        <div class="row mb-4">
+                        <div class="row mb-3">
                             <div class="col-6">
-                                <!-- Left side intentionally left empty -->
-                            </div>
-                            <div class="col-6 text-left" style="direction: ltr;">
                                 <t t-if="o and o.name">
                                     <img t-att-src="'/report/barcode/Code128/'+o.name" style="width:300px;height:50px;"/>
                                     <h3 class="mt-1 mb-0">Display Receipt</h3>
@@ -59,52 +57,60 @@
                                     <h4 class="mt-0 mb-1">Draft</h4>
                                 </t>
                             </div>
+                            <div class="col-6">
+                                <!-- Right side intentionally left empty -->
+                            </div>
                         </div>
                         
                         <!-- Receipt Information -->
-                        <div class="row mb-3">
-                            <div class="col-6">
-                                <strong>Created By:</strong>
-                                <p class="m-0" t-field="o.user_id" t-options="{'widget': 'contact', 'fields': ['name']}"/>
+                        <div class="row mb-1">
+                            <div class="col-4">
+                                <strong>Invoice Date:</strong>
+                                <p class="m-0" t-field="o.invoice_date"/>
                             </div>
-                            <div class="col-6 text-right">
+                            <div class="col-4 text-center">
+                                <strong>Created By:</strong>
+                                <p class="m-0" t-field="o.user_id"/>
+                            </div>
+                            <div class="col-4 text-right">
                                 <strong>Source:</strong>
                                 <p class="m-0" t-if="o.invoice_origin" t-field="o.invoice_origin"/>
                                 <p class="m-0" t-else="">-</p>
                             </div>
                         </div>
                         
-                        <!-- Product Details Table - Reordered columns to match reference image -->
-                        <table class="table table-sm o_main_table" style="font-size: 14px; direction: ltr;">
-                            <thead style="background-color: #1e2d40; color: white;">
+                        <!-- Product Details Table - Styled like purchase invoice -->
+                        <table class="table table-sm table-bordered mb-1" style="font-size: 14px;">
+                            <thead style="background-color: #f8f9fa;">
                                 <tr>
-                                    <th name="th_sr" class="text-center" style="width: 5%;">SR .NO</th>
-                                    <th name="th_description" class="text-center" style="width: 35%;">DESCRIPTION</th>
-                                    <th name="th_serial" class="text-center" style="width: 15%;">SERIAL NO</th>
-                                    <th name="th_model" class="text-center" style="width: 15%;">MODEL NO</th>
-                                    <th name="th_quantity" class="text-center" style="width: 15%;">QUANTITY</th>
-                                    <th name="th_amount" class="text-center" style="width: 15%;">AMOUNT</th>
+                                    <th class="text-left" style="width: 5%;">Sr no.</th>
+                                    <th class="text-left" style="width: 35%;">Description</th>
+                                    <th class="text-left" style="width: 15%;">Serial No</th>
+                                    <th class="text-left" style="width: 15%;">Model No</th>
+                                    <th class="text-left" style="width: 15%;">Quantity</th>
+                                    <th class="text-right" style="width: 15%;">Amount</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <t t-set="sr_no" t-value="0"/>
                                 <t t-foreach="o.invoice_line_ids" t-as="line">
-                                <tr>
-                                        <td class="text-center">
+                                    <tr>
+                                        <td>
                                             <t t-set="sr_no" t-value="sr_no+1"/>
                                             <span t-esc="sr_no"/>
                                         </td>
-                                        <td class="text-center">
+                                        <td>
                                             <span t-field="line.name" t-options="{'widget': 'text'}" style="font-weight: 500;"/>
                                         </td>
-                                        <td class="text-center">
+                                        <td>
                                             <span t-field="line.product_id.barcode"/>
                                         </td>
-                                        <td class="text-center">
+                                        <td>
                                             <span t-field="line.product_id.default_code"/>
                                         </td>
-                                        <td class="text-center">
-                                            Units <span t-field="line.quantity"/>
+                                        <td>
+                                            <span t-field="line.quantity"/>
+                                            <span t-field="line.product_uom_id" groups="uom.group_uom"/>
                                         </td>
                                         <td class="text-right">
                                             <span t-field="line.price_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
@@ -114,19 +120,21 @@
                             </tbody>
                         </table>
                         
-                        <!-- Total Section -->
-                        <div class="row">
-                            <div class="col-6"></div>
+                        <!-- Total Section - Styled like purchase invoice -->
+                        <div class="row mb-1">
                             <div class="col-6">
-                                <table class="table table-sm" style="direction: ltr;">
-                                    <tr class="border-top border-bottom">
-                                        <td class="text-right">Total</td>
-                                        <td class="text-left">
-                                            <span t-field="o.amount_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                <!-- Intentionally left empty for layout balance -->
+                            </div>
+                            <div class="col-6">
+                                <table class="table table-sm table-bordered mb-1" style="page-break-inside: avoid; font-size: 14px;">
+                                    <tr style="background-color: #f8f9fa;">
+                                        <td class="text-right"><strong>Total</strong></td>
+                                        <td class="text-right" style="width: 30%;">
+                                            <span t-field="o.amount_total"/> <span t-field="o.currency_id.symbol"/>
                                         </td>
                                     </tr>
                                 </table>
-                                <p style="direction: ltr;">
+                                <p class="text-right mb-1" style="font-size: 14px;">
                                     <strong>Total Amount: </strong>
                                     <span t-field="o.amount_total_words"/>
                                     <span t-if="o.currency_id.name == 'KWD'"> Dinars</span>
