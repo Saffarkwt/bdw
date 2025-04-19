@@ -11,12 +11,11 @@
 <img style="max-height: 70px;" t-att-src="'data:image/png;base64,%s' % o.company_id.logo.decode('utf-8')" t-if="o.company_id.logo"/>
 </div>
 <div class="col-6 text-right">
-<h3 style="margin-bottom: 0;">Blue Diamond الماسة الزرقاء</h3>
-<p style="margin-bottom: 0;">بيع - شراء - تثمين الساعات الثمينة</p>
+<h3 style="margin-bottom: 0; font-weight: bold;">Blue Diamond الماسة الزرقاء</h3>
+<p style="margin-bottom: 0; color: #333;">بيع - شراء - تثمين الساعات الثمينة</p>
 </div>
 </div>
 <!-- Header with Logo and Company Info - Copied exactly from purchase invoice template -->
-
 <hr style="margin-top: 5px; margin-bottom: 5px;"/>
 <!-- Customer Information -->
 <div class="row mb-3">
@@ -59,7 +58,6 @@
 </div>
 </div>
 <!-- Receipt Information -->
-
 <!-- Product Details Table - No colors, just borders -->
 <table class="table table-sm table-bordered mb-1" style="font-size: 14px;">
 <thead>
@@ -101,7 +99,6 @@
 </tbody>
 </table>
 <!-- Total Section - No colors, just borders -->
-
 <!-- Terms and Conditions - Reduced size to fit on one page -->
 <div class="row mt-3">
 <div class="col-12">
