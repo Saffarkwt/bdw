@@ -1,182 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Receipt Template -->
-    <template id="report_receipt">
-        <t t-call="web.html_container">
-            <t t-foreach="docs" t-as="o">
-                <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
-                <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
-                    <div class="page" style="font-size: 16px;">
-                        <!-- Header with Logo and Company Info - Copied exactly from purchase invoice template -->
-                        <div class="row mb-1">
-                            <div class="col-6">
-                                <img src="/receipt_print_module/static/description/blue_diamond_logo.png" style="max-height: 70px;" alt="Blue Diamond Logo"/>
-                            </div>
-                            <div class="col-6 text-right">
-                                <h3 style="margin-bottom: 0;">Blue Diamond الماسة الزرقاء</h3>
-                                <p style="margin-bottom: 0;">Sale - Purchase - Valuation of Precious Watches</p>
-                            </div>
-                        </div>
-                        
-                        <hr style="margin-top: 5px; margin-bottom: 5px;"/>
-                        
-                        <!-- Customer Information -->
-                        <div class="row mb-3">
-                            <div class="col-6">
-                                <!-- Left side intentionally left empty -->
-                            </div>
-                            <div class="col-6 text-right">
-                                <strong>Name : </strong><span t-field="o.partner_id.name"/><br/>
-                                <strong>Phone : </strong><span t-field="o.partner_id.phone"/><br/>
-                                <strong>Civil ID : </strong>
-                                <t t-if="o.partner_id.civil_id">
-                                    <span t-field="o.partner_id.civil_id"/>
-                                </t>
-                                <t t-elif="o.partner_id.vat">
-                                    <span t-field="o.partner_id.vat"/>
-                                </t>
-                                <t t-elif="o.partner_id.ref">
-                                    <span t-field="o.partner_id.ref"/>
-                                </t>
-                                <t t-else="">
-                                    <span t-esc="o.partner_id.id"/>
-                                </t>
-                            </div>
-                        </div>
-                        
-                        <!-- Barcode and Receipt Title -->
-                        <div class="row mb-3">
-                            <div class="col-6">
-                                <t t-if="o and o.name">
-                                    <img t-att-src="'/report/barcode/Code128/'+o.name" style="width:300px;height:50px;"/>
-                                    <h3 class="mt-1 mb-0">Display Receipt</h3>
-                                    <h4 class="mt-0 mb-1" t-field="o.name"/>
-                                </t>
-                                <t t-else="">
-                                    <h3 class="mt-1 mb-0">Display Receipt</h3>
-                                    <h4 class="mt-0 mb-1">Draft</h4>
-                                </t>
-                            </div>
-                            <div class="col-6">
-                                <!-- Right side intentionally left empty -->
-                            </div>
-                        </div>
-                        
-                        <!-- Receipt Information -->
-                        <div class="row mb-1">
-                            <div class="col-4">
-                                <strong>Invoice Date:</strong>
-                                <p class="m-0" t-field="o.invoice_date"/>
-                            </div>
-                            <div class="col-4 text-center">
-                                <strong>Created By:</strong>
-                                <p class="m-0" t-field="o.user_id"/>
-                            </div>
-                            <div class="col-4 text-right">
-                                <strong>Source:</strong>
-                                <p class="m-0" t-if="o.invoice_origin" t-field="o.invoice_origin"/>
-                                <p class="m-0" t-else="">-</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Product Details Table - No colors, just borders -->
-                        <table class="table table-sm table-bordered mb-1" style="font-size: 14px;">
-                            <thead>
-                                <tr>
-                                    <th class="text-left" style="width: 5%;">Sr no.</th>
-                                    <th class="text-left" style="width: 35%;">Description</th>
-                                    <th class="text-left" style="width: 15%;">Serial No</th>
-                                    <th class="text-left" style="width: 15%;">Model No</th>
-                                    <th class="text-left" style="width: 15%;">Quantity</th>
-                                    <th class="text-right" style="width: 15%;">Amount</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <t t-set="sr_no" t-value="0"/>
-                                <t t-foreach="o.invoice_line_ids" t-as="line">
-                                    <tr>
-                                        <td>
-                                            <t t-set="sr_no" t-value="sr_no+1"/>
-                                            <span t-esc="sr_no"/>
-                                        </td>
-                                        <td>
-                                            <span t-field="line.name" t-options="{'widget': 'text'}" style="font-weight: 500;"/>
-                                        </td>
-                                        <td>
-                                            <span t-field="line.product_id.barcode"/>
-                                        </td>
-                                        <td>
-                                            <span t-field="line.product_id.default_code"/>
-                                        </td>
-                                        <td>
-                                            <span t-field="line.quantity"/>
-                                            <span t-field="line.product_uom_id" groups="uom.group_uom"/>
-                                        </td>
-                                        <td class="text-right">
-                                            <span t-field="line.price_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
-                                        </td>
-                                    </tr>
-                                </t>
-                            </tbody>
-                        </table>
-                        
-                        <!-- Total Section - No colors, just borders -->
-                        <div class="row mb-1">
-                            <div class="col-6">
-                                <!-- Intentionally left empty for layout balance -->
-                            </div>
-                            <div class="col-6">
-                                <table class="table table-sm table-bordered mb-1" style="page-break-inside: avoid; font-size: 14px;">
-                                    <tr>
-                                        <td class="text-right"><strong>Total</strong></td>
-                                        <td class="text-right" style="width: 30%;">
-                                            <span t-field="o.amount_total"/> <span t-field="o.currency_id.symbol"/>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <p class="text-right mb-1" style="font-size: 14px;">
-                                    <strong>Total Amount: </strong>
-                                    <span t-field="o.amount_total_words"/>
-                                    <span t-if="o.currency_id.name == 'KWD'"> Dinars</span>
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <!-- Terms and Conditions - Reduced size to fit on one page -->
-                        <div class="row mt-3">
-                            <div class="col-12">
-                                <h6 class="text-right mb-1">الشروط والأحكام</h6>
-                                <p class="text-right mb-1" style="font-size: 12px;">إقرار من العميل</p>
-                                <ol class="text-right mb-2" style="direction: rtl; font-size: 11px; padding-right: 20px; margin-bottom: 5px;">
-                                    <li>أقر أنا المذكور اسمي أعلاه بأن القطعة المعروضة عائد لي/مملوكة لي وليست مسروقة أو مقلدة ولا يوجد أي استرجاع ما هو مباع مرة واحدة وأتحمل المسؤولية الكاملة 1.</li>
-                                    <li>في حالة طلب استرداد القطعة المعروضة على صاحب المقتنى/ صاحب القطعة المدنية المذكور أعلاه الحضور وإبراز البطاقة المدنية وتسليم إيصال العرض لاستلام المبيع 2.</li>
-                                    <li>الماسة الزرقاء غير مسئولة عن الاضرار أو فقدان الذي يلحق بالمبيع في حال عدم استلام صاحب القطعة المعروضة/ صاحب البطاقة المدنية المذكور أعلاه في حال تجاوز مدة العرض عن 3 شهور.</li>
-                                </ol>
-                                
-                                <h6 class="mb-1" style="direction: ltr;">TERMS &amp; CONDITIONS</h6>
-                                <p class="mb-1" style="direction: ltr; font-size: 12px;">Customer's Declaration</p>
-                                <ol style="direction: ltr; font-size: 11px; padding-left: 20px; margin-bottom: 5px;">
-                                    <li>I, above-mentioned name, declare that the items displayed belongs to me and it&apos;s not been stolen or inauthentic, and I do not have the rights to take the items displayed back after selling. Additionally, I take full responsibility in case of violation in conformity with rules, laws, and regulation etc. In State of Kuwait.</li>
-                                    <li>In case the owner of the item requested to return his displayed item, he must attend into the shop in person and show his identification and return the receipt.</li>
-                                    <li>Blue Diamond is not responsible for any damage or loss of the displayed item if the owner has not retrieved his belongings (items displayed) for more than 3 months.</li>
-                                </ol>
-                            </div>
-                        </div>
-                        
-                        <!-- Signature Section - Reduced margins -->
-                        <div class="row mt-2">
-                            <div class="col-6 text-right">
-                                <p style="margin-bottom: 5px;">الاسم</p>
-                                <div style="border-bottom: 1px solid black; height: 20px;"></div>
-                            </div>
-                            <div class="col-6 text-right">
-                                <p style="margin-bottom: 5px;">التوقيع</p>
-                                <div style="border-bottom: 1px solid black; height: 20px;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </t>
-        </t>
-    </template>
+<!-- Receipt Template -->
+<template id="report_receipt">
+<t t-call="web.html_container">
+<t t-as="o" t-foreach="docs">
+<t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
+<div class="article" t-att-data-oe-id="o and o.id" t-att-data-oe-model="o and o._name">
+<t t-as="o" t-foreach="docs">
+<t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
+<div class="article" t-att-data-oe-id="o and o.id" t-att-data-oe-model="o and o._name">
+<div class="page" style="font-size: 16px;"><div class="row mb-1">
+<div class="col-6">
+<img style="max-height: 70px;" t-att-src="'data:image/png;base64,%s' % o.company_id.logo.decode('utf-8')" t-if="o.company_id.logo"/>
+</div>
+<div class="col-6 text-right">
+<h3 style="margin-bottom: 0;">Blue Diamond الماسة الزرقاء</h3>
+<p style="margin-bottom: 0;">بيع - شراء - تثمين الساعات الثمينة</p>
+</div>
+</div>
+
+<hr style="margin-top: 5px; margin-bottom: 15px;"/>
+</div></div></t><div class="page" style="font-size: 16px;">
+<!-- Header with Logo and Company Info - Copied exactly from purchase invoice template -->
+<hr style="margin-top: 5px; margin-bottom: 5px;"/>
+<!-- Customer Information -->
+<div class="row mb-3">
+<div class="col-6">
+<!-- Left side intentionally left empty -->
+</div>
+<div class="col-6 text-right">
+<strong>Name : </strong><span t-field="o.partner_id.name"/><br/>
+<strong>Phone : </strong><span t-field="o.partner_id.phone"/><br/>
+<strong>Civil ID : </strong>
+<t t-if="o.partner_id.civil_id">
+<span t-field="o.partner_id.civil_id"/>
+</t>
+<t t-elif="o.partner_id.vat">
+<span t-field="o.partner_id.vat"/>
+</t>
+<t t-elif="o.partner_id.ref">
+<span t-field="o.partner_id.ref"/>
+</t>
+<t t-else="">
+<span t-esc="o.partner_id.id"/>
+</t>
+</div>
+</div>
+<!-- Barcode and Receipt Title -->
+<div class="row mb-3">
+<div class="col-6">
+<t t-if="o and o.name">
+<img style="width:300px;height:50px;" t-att-src="'/report/barcode/Code128/'+o.name"/>
+<h3 class="mt-1 mb-0">Display Receipt</h3>
+<h4 class="mt-0 mb-1" t-field="o.name"/>
+</t>
+<t t-else="">
+<h3 class="mt-1 mb-0">Display Receipt</h3>
+<h4 class="mt-0 mb-1">Draft</h4>
+</t>
+</div>
+<div class="col-6">
+<!-- Right side intentionally left empty -->
+</div>
+</div>
+<!-- Receipt Information -->
+<!-- Product Details Table - No colors, just borders -->
+<table class="table table-sm table-bordered mb-1" style="font-size: 14px;">
+<thead>
+<tr>
+<th class="text-left" style="width: 5%;">Sr no.</th>
+<th class="text-left" style="width: 35%;">Description</th>
+<th class="text-left" style="width: 15%;">Serial No</th>
+<th class="text-left" style="width: 15%;">Model No</th>
+<th class="text-left" style="width: 15%;">Quantity</th>
+<th class="text-right" style="width: 15%;">Amount</th>
+</tr>
+</thead>
+<tbody>
+<t t-set="sr_no" t-value="0"/>
+<t t-as="line" t-foreach="o.invoice_line_ids">
+<tr>
+<td>
+<t t-set="sr_no" t-value="sr_no+1"/>
+<span t-esc="sr_no"/>
+</td>
+<td>
+<span style="font-weight: 500;" t-field="line.name" t-options="{'widget': 'text'}"/>
+</td>
+<td>
+<span t-field="line.product_id.barcode"/>
+</td>
+<td>
+<span t-field="line.product_id.default_code"/>
+</td>
+<td>
+<span t-field="line.quantity"/>
+<span groups="uom.group_uom" t-field="line.product_uom_id"/>
+</td>
+<td class="text-right">
+<span t-field="line.price_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+</td>
+</tr>
+</t>
+</tbody>
+</table>
+<!-- Total Section - No colors, just borders -->
+<!-- Terms and Conditions - Reduced size to fit on one page -->
+<div class="row mt-3">
+<div class="col-12">
+<h6 class="text-right mb-1">الشروط والأحكام</h6>
+<p class="text-right mb-1" style="font-size: 12px;">إقرار من العميل</p>
+<ol class="text-right mb-2" style="direction: rtl; font-size: 11px; padding-right: 20px; margin-bottom: 5px;">
+<li>أقر أنا المذكور اسمي أعلاه بأن القطعة المعروضة عائد لي/مملوكة لي وليست مسروقة أو مقلدة ولا يوجد أي استرجاع ما هو مباع مرة واحدة وأتحمل المسؤولية الكاملة 1.</li>
+<li>في حالة طلب استرداد القطعة المعروضة على صاحب المقتنى/ صاحب القطعة المدنية المذكور أعلاه الحضور وإبراز البطاقة المدنية وتسليم إيصال العرض لاستلام المبيع 2.</li>
+<li>الماسة الزرقاء غير مسئولة عن الاضرار أو فقدان الذي يلحق بالمبيع في حال عدم استلام صاحب القطعة المعروضة/ صاحب البطاقة المدنية المذكور أعلاه في حال تجاوز مدة العرض عن 3 شهور.</li>
+</ol>
+<h6 class="mb-1" style="direction: ltr;">TERMS &amp; CONDITIONS</h6>
+<p class="mb-1" style="direction: ltr; font-size: 12px;">Customer's Declaration</p>
+<ol style="direction: ltr; font-size: 11px; padding-left: 20px; margin-bottom: 5px;">
+<li>I, above-mentioned name, declare that the items displayed belongs to me and it's not been stolen or inauthentic, and I do not have the rights to take the items displayed back after selling. Additionally, I take full responsibility in case of violation in conformity with rules, laws, and regulation etc. In State of Kuwait.</li>
+<li>In case the owner of the item requested to return his displayed item, he must attend into the shop in person and show his identification and return the receipt.</li>
+<li>Blue Diamond is not responsible for any damage or loss of the displayed item if the owner has not retrieved his belongings (items displayed) for more than 3 months.</li>
+</ol>
+</div>
+</div>
+<!-- Signature Section - Reduced margins -->
+<div class="row mt-2">
+<div class="col-6 text-right">
+<p style="margin-bottom: 5px;">الاسم</p>
+<div style="border-bottom: 1px solid black; height: 20px;"/>
+</div>
+<div class="col-6 text-right">
+<p style="margin-bottom: 5px;">التوقيع</p>
+<div style="border-bottom: 1px solid black; height: 20px;"/>
+</div>
+</div>
+</div>
+</div>
+</t>
+</t>
+</template>
 </odoo>
