@@ -16,12 +16,9 @@
                             </div>
                         </div>
                         
-                        <!-- Customer Information -->
+                        <!-- Customer Information - Correctly positioned at extreme right -->
                         <div class="row mb-3">
-                            <div class="col-6">
-                                <!-- Left side intentionally left empty -->
-                            </div>
-                            <div class="col-6 text-right">
+                            <div class="col-3 text-right" style="padding-right: 0;">
                                 <strong>Name : </strong><span t-field="o.partner_id.name"/><br/>
                                 <strong>Phone : </strong><span t-field="o.partner_id.phone"/><br/>
                                 <strong>Civil ID : </strong>
@@ -37,6 +34,9 @@
                                 <t t-else="">
                                     <span t-esc="o.partner_id.id"/>
                                 </t>
+                            </div>
+                            <div class="col-9">
+                                <!-- Right side intentionally left empty -->
                             </div>
                         </div>
                         
@@ -105,10 +105,9 @@
                             </tbody>
                         </table>
                         
-                        <!-- Total Section -->
+                        <!-- Total Section - Modified to position at extreme right -->
                         <div class="row">
-                            <div class="col-6"></div>
-                            <div class="col-6">
+                            <div class="col-3 text-right" style="padding-right: 0;">
                                 <table class="table table-sm">
                                     <tr>
                                         <td class="text-right"><strong>Total</strong></td>
@@ -121,6 +120,9 @@
                                     <strong>Total Amount: </strong>
                                     <span t-field="o.amount_total_words"/>
                                 </p>
+                            </div>
+                            <div class="col-9">
+                                <!-- Right side intentionally left empty -->
                             </div>
                         </div>
                         
