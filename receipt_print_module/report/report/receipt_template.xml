@@ -107,8 +107,9 @@
                         
                         <!-- Total Section -->
                         <div class="row">
-                            <div class="col-6"></div>
                             <div class="col-6">
+                                <table class="table table-sm">
+
                                 <table class="table table-sm">
                                     <tr>
                                         <td class="text-right"><strong>Total</strong></td>
