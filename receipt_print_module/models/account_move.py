@@ -35,7 +35,7 @@ class AccountMove(models.Model):
             else:
                 record.amount_total_words = ''
     
-    def action_print_receipt(self):
+    def print_receipt(self):
         """
         Direct method to print the receipt template
         """
