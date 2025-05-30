@@ -9,23 +9,23 @@
                 <t t-set="table_style" t-value="'width:97mm;height:37.1mm;' + table_style"/>
                 <td t-att-style="make_invisible and 'visibility:hidden;'">
                     <div class="o_label_full" t-att-style="table_style">
-                        <div class="o_label_name">
+                        <div class="o_label_name" style="font-size: 14pt;">
                             <strong t-field="product.display_name"/>
                         </div>
                         <div class="o_label_data">
                             <div class="text-center o_label_left_column">
-                                <span class="text-nowrap" t-field="product.default_code"/>
+                                <span class="text-nowrap" t-field="product.default_code" style="font-size: 14pt; font-weight: bold;"/>
                                 <t t-if="barcode">
                                     <div t-out="barcode" t-options="{'widget': 'barcode', 'symbology': 'auto', 'img_style': barcode_size}"/>
-                                    <span class="text-center" t-out="barcode"/>
+                                    <span class="text-center" t-out="barcode" style="font-size: 12pt;"/>
                                 </t>
                             </div>
                             <div class="text-end" style="line-height:normal">
-                                <div class="o_label_extra_data">
+                                <div class="o_label_extra_data" style="font-size: 12pt;">
                                     <!-- عرض محتوى extra_html مباشرة بدون تعديل -->
                                     <t t-out="extra_html"/>
                                 </div>
-                                <strong class="o_label_price" t-out="pricelist._get_product_price(product, 1, pricelist.currency_id or product.currency_id)" t-options="{'widget': 'monetary', 'display_currency': pricelist.currency_id or product.currency_id, 'label_price': True}"/>
+                                <strong class="o_label_price" t-out="pricelist._get_product_price(product, 1, pricelist.currency_id or product.currency_id)" t-options="{'widget': 'monetary', 'display_currency': pricelist.currency_id or product.currency_id, 'label_price': True}" style="font-size: 18pt; font-weight: bold;"/>
                             </div>
                             <div class="o_label_clear"/>
                         </div>
